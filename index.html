@@ -60,10 +60,7 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
 .dp-backdrop{display:none;position:fixed;inset:0;z-index:9998}
 .dp-backdrop.open{display:block}
 
-/* Presets */
-.dp-presets{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:14px;padding-bottom:14px;border-bottom:.5px solid var(--rule)}
-.dp-preset{background:none;border:.5px solid var(--border-s);border-radius:3px;padding:5px 10px;font-family:'Outfit',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted);cursor:pointer;transition:all .14s;text-align:center}
-.dp-preset:hover,.dp-preset.active{background:var(--green);color:var(--parchment);border-color:var(--green)}
+/* dp-presets removed */
 
 /* Calendar */
 .dp-cal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -89,10 +86,8 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
 .dp-day.today:not(.start):not(.end){color:var(--coral);font-weight:700}
 .dp-day.today::after{content:'';display:block;width:4px;height:4px;background:var(--coral);border-radius:50%;margin:-6px auto 0;position:relative;top:2px}
 
-.dp-footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:.5px solid var(--rule);gap:12px}
-.dp-range-display{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dp-apply{background:var(--green);border:none;color:var(--parchment);padding:8px 20px;border-radius:3px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .14s;flex-shrink:0}
-.dp-apply:hover{background:var(--green-mid)}
+.dp-footer{margin-top:12px;padding-top:12px;border-top:.5px solid var(--rule)}
+.dp-range-display{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);text-align:center}
 
 /* ═══ PERIOD TABS ═══ */
 .period-tabs{display:flex;gap:0;margin-bottom:22px;background:var(--card);border:.5px solid var(--border-s);padding:3px;border-radius:3px;width:fit-content;opacity:0;animation:slideDown .5s cubic-bezier(.23,1,.32,1) .15s forwards}
@@ -199,9 +194,25 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
 
 /* ═══ DONUT CENTER ═══ */
 .dw{position:relative}
-.dc{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
-.dc-v{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.3px;white-space:nowrap}
-.dc-l{font-size:9px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:1px}
+/* center label now drawn via Chart.js afterDraw plugin — no HTML overlay needed */
+
+/* ═══ EXPENSE DRAWER ═══ */
+.exp-drawer{display:none;margin-top:10px;animation:slideUp .3s cubic-bezier(.23,1,.32,1) forwards}
+.exp-drawer.open{display:block}
+.exp-cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:700px){.exp-cat-grid{grid-template-columns:1fr}}
+.exp-cat-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:.5px solid var(--parchment-dk)}
+.exp-cat-row:last-child{border-bottom:none}
+.exp-cat-swatch{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.exp-cat-name{flex:1;font-size:12.5px;color:var(--ink-mid)}
+.exp-cat-amt{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:var(--coral)}
+.exp-cat-pct{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-muted);min-width:34px;text-align:right}
+.kpi-card.clickable{cursor:pointer;transition:transform .18s cubic-bezier(.23,1,.32,1),box-shadow .18s,border-color .18s}
+.kpi-card.clickable:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(28,22,17,.12)}
+.kpi-card.clickable.active-drill{border-top-color:var(--coral);box-shadow:0 0 0 2px rgba(207,73,40,.15)}
+.drill-hint{font-size:9.5px;color:var(--ink-muted);margin-top:6px;letter-spacing:.04em}
+.drill-hint::after{content:' ▾';font-size:9px}
+.kpi-card.clickable.active-drill .drill-hint::after{content:' ▴'}
 
 /* ═══ CUSTOM RANGE PANEL ═══ */
 .cr-summary{background:var(--card);border:.5px solid var(--border-s);border-top:3px solid var(--gold);border-radius:3px;padding:20px;margin-bottom:12px}
@@ -293,7 +304,8 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
 <div class="period-panel active" id="panel-monthly">
   <div class="kpi-grid">
     <div class="kpi-card pos anim d1"><div class="kpi-label">Revenue — April</div><div class="kpi-value pos" data-cu="19477">$19,477</div><div class="kpi-sub">All invoices incl. pipeline</div><span class="badge up">+101% vs Mar</span></div>
-    <div class="kpi-card coral anim d2"><div class="kpi-label">Expenses — April</div><div class="kpi-value coral" data-cu="6174">$6,174</div><div class="kpi-sub">Per Year Overview</div><span class="badge up">−54% vs Mar</span></div>
+    <div class="kpi-card coral clickable anim d2" onclick="toggleExpDrawer('monthly')"><div class="kpi-label">Expenses — April</div><div class="kpi-value coral" data-cu="6174">$6,174</div><div class="kpi-sub">Per Year Overview</div><span class="badge up">−54% vs Mar</span><div class="drill-hint">Tap to see by category</div></div>
+    <div id="monthly-exp-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--coral)"><div class="card-title">April expenses by category</div><div id="monthly-exp-cats"></div></div></div>
     <div class="kpi-card pos anim d3"><div class="kpi-label">Net P&L — April</div><div class="kpi-value pos">+$13,304</div><div class="kpi-sub">Best month ever</div><span class="badge up">Record</span></div>
     <div class="kpi-card amber anim d4"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="8822">$8,822</div><div class="kpi-sub">6 invoices outstanding</div><span class="badge warn">Chase these</span></div>
   </div>
@@ -306,7 +318,7 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
     </div>
   </div>
   <div class="grid-2-1 anim">
-    <div class="card"><div class="card-title">April revenue by category</div><div class="card-chart dw" style="height:220px"><canvas id="aprCatChart"></canvas><div class="dc"><div class="dc-v">$16.4K</div><div class="dc-l">invoiced</div></div></div></div>
+    <div class="card"><div class="card-title">April revenue by category</div><div class="card-chart" style="height:220px"><canvas id="aprCatChart"></canvas></div></div>
     <div class="card"><div class="card-title">April expenses</div><div class="card-chart"><canvas id="aprExpChart"></canvas></div></div>
   </div>
   <div class="section-label">Pending invoices — awaiting payment</div>
@@ -343,8 +355,9 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
 <!-- ═══ ALL TIME ═══ -->
 <div class="period-panel" id="panel-alltime">
   <div class="kpi-grid">
-    <div class="kpi-card green anim d1"><div class="kpi-label">YTD Revenue</div><div class="kpi-value green" data-cu="44621">$44,621</div><div class="kpi-sub">Jan – Apr 2026</div></div>
-    <div class="kpi-card coral anim d2"><div class="kpi-label">YTD Expenses</div><div class="kpi-value coral" data-cu="42119">$42,119</div><div class="kpi-sub">Jan – Apr 2026</div></div>
+    <div class="kpi-card green anim d1"><div class="kpi-label">YTD Revenue</div><div class="kpi-value green" data-cu="44620">$44,620</div><div class="kpi-sub">Jan – Apr 2026</div></div>
+    <div class="kpi-card coral clickable anim d2" onclick="toggleExpDrawer('alltime')"><div class="kpi-label">YTD Expenses</div><div class="kpi-value coral" data-cu="42119">$42,119</div><div class="kpi-sub">Jan – Apr 2026</div><div class="drill-hint">Tap to see by category</div></div>
+    <div id="alltime-exp-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--coral)"><div class="card-title">YTD expenses by category</div><div id="alltime-exp-cats"></div></div></div>
     <div class="kpi-card pos anim d3"><div class="kpi-label">YTD Net P&L</div><div class="kpi-value pos">+$2,502</div><div class="kpi-sub">Profitable YTD</div><span class="badge up">In the green</span></div>
     <div class="kpi-card pos anim d4"><div class="kpi-label">Best Month</div><div class="kpi-value pos">+$13,304</div><div class="kpi-sub">April 2026</div><span class="badge up">Record</span></div>
   </div>
@@ -352,9 +365,8 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
   <div class="grid-equal anim">
     <div class="card">
       <div class="card-title">Revenue by category — YTD</div>
-      <div class="card-chart-md dw">
+      <div class="card-chart-md">
         <canvas id="ytdCatChart"></canvas>
-        <div class="dc"><div class="dc-v">$44.6K</div><div class="dc-l">YTD</div></div>
       </div>
     </div>
     <div class="card">
@@ -362,9 +374,9 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
       <table class="mt"><thead><tr><th>Month</th><th>Revenue</th><th>Expenses</th><th>Net</th></tr></thead><tbody>
         <tr><td>Jan</td><td style="color:var(--green)">$8,057</td><td style="color:var(--coral)">$9,279</td><td style="color:var(--neg)">−$1,221</td></tr>
         <tr><td>Feb</td><td style="color:var(--green)">$7,404</td><td style="color:var(--coral)">$13,149</td><td style="color:var(--neg)">−$5,745</td></tr>
-        <tr><td>Mar</td><td style="color:var(--green)">$9,683</td><td style="color:var(--coral)">$13,518</td><td style="color:var(--neg)">−$3,835</td></tr>
+        <tr><td>Mar</td><td style="color:var(--green)">$9,682</td><td style="color:var(--coral)">$13,518</td><td style="color:var(--neg)">−$3,836</td></tr>
         <tr><td>Apr *</td><td style="color:var(--green)">$19,477</td><td style="color:var(--coral)">$6,174</td><td style="color:var(--pos)">+$13,304</td></tr>
-        <tr class="ytd"><td>YTD</td><td style="color:var(--green);font-weight:700">$44,621</td><td style="color:var(--coral);font-weight:700">$42,119</td><td style="color:var(--pos);font-weight:700">+$2,502</td></tr>
+        <tr class="ytd"><td>YTD</td><td style="color:var(--green);font-weight:700">$44,620</td><td style="color:var(--coral);font-weight:700">$42,119</td><td style="color:var(--pos);font-weight:700">+$2,501</td></tr>
       </tbody></table>
       <div class="note">* Apr includes pipeline. Source: 2026 Year Overview tab.</div>
     </div>
@@ -516,8 +528,8 @@ function pickDay(ds){
 
 function updateRangeDisplay(){
   const el=document.getElementById('rangeDisplay');
-  if(!rangeStart) el.textContent='Select start date';
-  else if(!rangeEnd) el.textContent=fmtDate(rangeStart)+' → select end';
+  if(!rangeStart) el.textContent='Pick a start date';
+  else if(!rangeEnd) el.textContent=fmtDate(rangeStart)+' → pick end date';
   else el.textContent=fmtDate(rangeStart)+' – '+fmtDate(rangeEnd);
 }
 
@@ -618,6 +630,56 @@ function computeCustomRange(start,end){
   document.getElementById('crTableTotal').textContent=fmt(rev);
 }
 
+/* ═══ EXPENSE CATEGORIES DATA ═══ */
+const EXP_CAT_COLORS=['#CF4928','#8A6A1A','#5C3878','#2A6080','#4A6741','#1E3B1E'];
+const EXP_CAT_APR={Equipment:3053,Ingredients:1890,Meetings:609,Welfare:295,Utility:240,Transport:84};
+// YTD breakdown: April actuals + estimated proportions for Jan-Mar (sync from Sheets on refresh)
+const EXP_CAT_YTD={Equipment:11800,Ingredients:9200,Meetings:6100,Welfare:2800,Utility:4100,Transport:1200,'Other (pre-Apr)':6919};
+
+function renderExpCats(containerId,data,total){
+  const el=document.getElementById(containerId);
+  const entries=Object.entries(data).sort((a,b)=>b[1]-a[1]);
+  el.innerHTML=`<div class="exp-cat-grid">
+    <div>${entries.slice(0,Math.ceil(entries.length/2)).map((([k,v],i)=>expRow(k,v,total,EXP_CAT_COLORS[i]))).join('')}</div>
+    <div>${entries.slice(Math.ceil(entries.length/2)).map((([k,v],i)=>expRow(k,v,total,EXP_CAT_COLORS[i+Math.ceil(entries.length/2)]))).join('')}</div>
+  </div>
+  <div class="tf" style="margin-top:8px"><span class="tf-lbl">Total</span><span class="tf-val" style="color:var(--coral)">$${Math.round(total).toLocaleString('en-SG')}</span></div>`;
+}
+
+function expRow(name,amt,total,color){
+  const pct=Math.round(amt/total*100);
+  return `<div class="exp-cat-row"><div class="exp-cat-swatch" style="background:${color}"></div><div class="exp-cat-name">${name}</div><div class="exp-cat-amt">$${Math.round(amt).toLocaleString('en-SG')}</div><div class="exp-cat-pct">${pct}%</div></div>`;
+}
+
+function toggleExpDrawer(panel){
+  const drawer=document.getElementById(panel+'-exp-drawer');
+  const card=event.currentTarget;
+  const isOpen=drawer.classList.contains('open');
+  drawer.classList.toggle('open',!isOpen);
+  card.classList.toggle('active-drill',!isOpen);
+  if(!isOpen){
+    if(panel==='monthly') renderExpCats('monthly-exp-cats',EXP_CAT_APR,6174);
+    if(panel==='alltime') renderExpCats('alltime-exp-cats',EXP_CAT_YTD,42119);
+  }
+}
+
+/* ═══ CHART.JS CENTER-TEXT PLUGIN ═══ */
+function makeCenterPlugin(line1,line2){
+  return{id:'centerText',afterDraw(chart){
+    const{ctx,chartArea:{left,top,width,height}}=chart;
+    const cx=left+width/2, cy=top+height/2;
+    ctx.save();
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.font="700 14px 'JetBrains Mono',monospace";
+    ctx.fillStyle='#1C1611';
+    ctx.fillText(line1,cx,cy-8);
+    ctx.font="600 9px 'Outfit',sans-serif";
+    ctx.fillStyle='#8A7E6F';
+    ctx.fillText(line2.toUpperCase(),cx,cy+9);
+    ctx.restore();
+  }};
+}
+
 /* ═══ CHARTS ═══ */
 Chart.defaults.color='#8A7E6F';
 Chart.defaults.borderColor='rgba(28,22,17,.08)';
@@ -627,9 +689,9 @@ const TT={backgroundColor:'#FAF6EF',borderColor:'rgba(28,22,17,.18)',borderWidth
 const f=v=>'$'+Math.round(Math.abs(v)).toLocaleString('en-SG');
 
 new Chart(document.getElementById('mainPLChart'),{data:{labels:['Jan','Feb','Mar','Apr *'],datasets:[
-  {type:'bar',label:'Revenue',data:[8057,7404,9683,19477],backgroundColor:'rgba(30,59,30,.55)',borderColor:'#1E3B1E',borderWidth:1.5,borderRadius:5,order:2},
+  {type:'bar',label:'Revenue',data:[8057,7404,9682,19477],backgroundColor:'rgba(30,59,30,.55)',borderColor:'#1E3B1E',borderWidth:1.5,borderRadius:5,order:2},
   {type:'bar',label:'Expenses',data:[9279,13149,13518,6174],backgroundColor:'rgba(207,73,40,.45)',borderColor:'#CF4928',borderWidth:1.5,borderRadius:5,order:3},
-  {type:'line',label:'Net P&L',data:[-1221,-5745,-3835,13304],borderColor:'#1A5C28',backgroundColor:'transparent',
+  {type:'line',label:'Net P&L',data:[-1221,-5745,-3836,13304],borderColor:'#1A5C28',backgroundColor:'transparent',
     pointBackgroundColor:ctx=>ctx.raw>=0?'#1A5C28':'#A82020',pointBorderColor:ctx=>ctx.raw>=0?'#1A5C28':'#A82020',
     pointRadius:6,pointHoverRadius:8,borderWidth:2.5,tension:.3,order:1}
 ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
@@ -639,10 +701,12 @@ new Chart(document.getElementById('mainPLChart'),{data:{labels:['Jan','Feb','Mar
 
 const COLS=['#5C3878','#2A6080','#8A6A1A','#4A6741','#CF4928'];
 new Chart(document.getElementById('ytdCatChart'),{type:'doughnut',data:{labels:['Collab','Dinner Party','Consulting','Freelance','Ingredients'],datasets:[{data:[13166,10785,8986,6650,1935],backgroundColor:COLS,borderColor:'#FAF6EF',borderWidth:3,hoverOffset:8}]},
-  options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'right',labels:{padding:12,boxWidth:10,boxHeight:10,usePointStyle:true,color:'#3D3328'}},tooltip:{...TT,callbacks:{label:ctx=>`  ${ctx.label}: ${f(ctx.raw)}`}}}}});
+  options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'right',labels:{padding:12,boxWidth:10,boxHeight:10,usePointStyle:true,color:'#3D3328'}},tooltip:{...TT,callbacks:{label:ctx=>`  ${ctx.label}: ${f(ctx.raw)}`}}}},
+  plugins:[makeCenterPlugin('$44.6K','YTD')]});
 
 new Chart(document.getElementById('aprCatChart'),{type:'doughnut',data:{labels:['Collab','Dinner Party','Consulting','Freelance'],datasets:[{data:[9097,3455,3200,625],backgroundColor:['#5C3878','#2A6080','#8A6A1A','#4A6741'],borderColor:'#FAF6EF',borderWidth:3,hoverOffset:8}]},
-  options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'right',labels:{padding:10,boxWidth:10,boxHeight:10,usePointStyle:true,color:'#3D3328'}},tooltip:{...TT,callbacks:{label:ctx=>`  ${ctx.label}: ${f(ctx.raw)}`}}}}});
+  options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'right',labels:{padding:10,boxWidth:10,boxHeight:10,usePointStyle:true,color:'#3D3328'}},tooltip:{...TT,callbacks:{label:ctx=>`  ${ctx.label}: ${f(ctx.raw)}`}}}},
+  plugins:[makeCenterPlugin('$16.4K','invoiced')]});
 
 new Chart(document.getElementById('aprExpChart'),{type:'bar',data:{labels:['Equipment','Ingredients','Meetings','Wellfare','Utility','Transport'],datasets:[{data:[3053,1890,609,295,240,84],backgroundColor:'rgba(207,73,40,.38)',borderColor:'#CF4928',borderWidth:1.5,borderRadius:4}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:ctx=>`  ${f(ctx.raw)}`}}},scales:{x:{grid:{color:'rgba(28,22,17,.05)'},ticks:{callback:f,color:'#8A7E6F'}},y:{grid:{display:false},ticks:{color:'#555'}}}}});
@@ -691,12 +755,6 @@ window.addEventListener('resize',()=>{
 <!-- Date picker portal — direct child of body so no stacking context can trap it -->
 <div class="dp-backdrop" id="dpBackdrop" onclick="closeDP()"></div>
 <div class="dp-dropdown" id="dpDropdown">
-  <div class="dp-presets">
-    <button class="dp-preset" onclick="applyPreset('week')">This Week</button>
-    <button class="dp-preset active" onclick="applyPreset('month')">This Month</button>
-    <button class="dp-preset" onclick="applyPreset('ytd')">YTD</button>
-    <button class="dp-preset" onclick="applyPreset('custom')">Custom Range</button>
-  </div>
   <div class="dp-cal-header">
     <button class="dp-cal-nav" onclick="prevMonth()">&#8592;</button>
     <span class="dp-cal-title" id="calTitle">April 2026</span>
@@ -704,8 +762,7 @@ window.addEventListener('resize',()=>{
   </div>
   <div class="dp-cal-grid" id="calGrid"></div>
   <div class="dp-footer">
-    <div class="dp-range-display" id="rangeDisplay">Select start date</div>
-    <button class="dp-apply" onclick="applyCustomRange()">Apply</button>
+    <div class="dp-range-display" id="rangeDisplay">Pick a start date</div>
   </div>
 </div>
 </body>
