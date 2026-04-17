@@ -6,308 +6,292 @@
 <title>The Dinner Club SG — P&L</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-/* ─────────────────────────────────────────
-   BASE
-───────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --green-deep:    #0f1f0f;
-  --green-base:    #1E3B1E;
-  --green-mid:     #243f24;
-  --green-surface: #2a4a2a;
-  --green-muted:   #3a5c3a;
-  --green-border:  rgba(255,255,255,0.07);
-  --coral:         #CF4928;
-  --coral-light:   #e86040;
-  --coral-dim:     rgba(207,73,40,0.15);
-  --warm-white:    #F5F0EB;
-  --warm-muted:    rgba(245,240,235,0.45);
-  --warm-faint:    rgba(245,240,235,0.12);
-  --chili:         #E0271A;
-  --amber:         #D4860A;
-  --amber-dim:     rgba(212,134,10,0.15);
-  --blue-soft:     #6ba3be;
-  --positive:      #5dbd7a;
-  --positive-dim:  rgba(93,189,122,0.15);
-  --negative:      #e05a5a;
-  --negative-dim:  rgba(224,90,90,0.15);
+  --cream:        #F5F0EB;
+  --cream-dark:   #EDE8E2;
+  --white:        #FFFFFF;
+  --green:        #1E3B1E;
+  --green-mid:    #2A5024;
+  --green-light:  #4A6741;
+  --green-pale:   #EBF0EB;
+  --coral:        #CF4928;
+  --coral-light:  #E06040;
+  --coral-pale:   #FAECEA;
+  --ink:          #1A1A1A;
+  --ink-mid:      #444444;
+  --ink-muted:    #888888;
+  --amber:        #B5730A;
+  --amber-pale:   #FDF3E3;
+  --positive:     #1A6B2A;
+  --positive-pale:#E8F5EB;
+  --negative:     #C03030;
+  --negative-pale:#FAEAEA;
+  --purple:       #7C4DA0;
+  --purple-pale:  #F3EEF8;
+  --border:       rgba(30,59,30,0.12);
+  --border-strong:rgba(30,59,30,0.25);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--green-deep);
-  color: var(--warm-white);
+  background: var(--cream);
+  color: var(--ink);
   font-family: 'Outfit', sans-serif;
   font-size: 14px;
   line-height: 1.5;
   min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* Grain texture */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 1000;
 }
 
 .page {
-  max-width: 1360px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 32px 28px 60px;
+  padding: 32px 28px 64px;
 }
 
-/* ─────────────────────────────────────────
-   TYPOGRAPHY
-───────────────────────────────────────── */
-.fraunces { font-family: 'Fraunces', serif; }
-.mono { font-family: 'JetBrains Mono', monospace; }
-
-/* ─────────────────────────────────────────
-   HEADER
-───────────────────────────────────────── */
+/* ─── HEADER ─── */
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 36px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--green-border);
+  align-items: flex-end;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--green);
   opacity: 0;
-  transform: translateY(-12px);
-  animation: fadeSlideDown 0.6s cubic-bezier(0.23,1,0.32,1) 0.1s forwards;
+  animation: slideDown 0.5s cubic-bezier(0.23,1,0.32,1) 0.05s forwards;
 }
 
-.header-left h1 {
+.header h1 {
   font-family: 'Fraunces', serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 900;
   letter-spacing: -0.03em;
-  color: var(--warm-white);
+  color: var(--green);
   line-height: 1;
 }
 
-.header-left h1 span { color: var(--coral); }
-
-.header-left .tagline {
-  font-size: 12px;
-  color: var(--warm-muted);
-  margin-top: 6px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-weight: 500;
+.header h1 em {
+  font-style: normal;
+  color: var(--coral);
 }
 
-.header-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
+.header-sub {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .as-of {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
-  color: var(--warm-muted);
-  background: var(--green-surface);
-  border: 1px solid var(--green-border);
+  color: var(--green);
+  background: var(--green-pale);
+  border: 1px solid var(--border-strong);
   padding: 5px 12px;
   border-radius: 20px;
+  font-weight: 600;
 }
 
-/* ─────────────────────────────────────────
-   PERIOD TABS
-───────────────────────────────────────── */
+/* ─── PERIOD TABS ─── */
 .period-tabs {
   display: flex;
-  gap: 2px;
-  margin-bottom: 28px;
-  background: var(--green-mid);
-  border: 1px solid var(--green-border);
+  gap: 3px;
+  margin-bottom: 24px;
+  background: var(--white);
+  border: 1.5px solid var(--border-strong);
   padding: 4px;
-  border-radius: 12px;
+  border-radius: 10px;
   width: fit-content;
   opacity: 0;
-  animation: fadeSlideDown 0.5s cubic-bezier(0.23,1,0.32,1) 0.25s forwards;
+  animation: slideDown 0.5s cubic-bezier(0.23,1,0.32,1) 0.15s forwards;
 }
 
 .period-tabs button {
   background: none;
   border: none;
-  color: var(--warm-muted);
+  color: var(--ink-muted);
   font-family: 'Outfit', sans-serif;
   font-size: 13px;
-  font-weight: 500;
-  padding: 9px 22px;
-  border-radius: 8px;
+  font-weight: 600;
+  padding: 8px 22px;
+  border-radius: 7px;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.23,1,0.32,1);
-  letter-spacing: 0.01em;
+  transition: all 0.18s cubic-bezier(0.23,1,0.32,1);
 }
 
 .period-tabs button.active {
-  background: var(--green-surface);
-  color: var(--warm-white);
-  border: 1px solid var(--green-border);
-  box-shadow: 0 1px 8px rgba(0,0,0,0.3);
+  background: var(--green);
+  color: var(--cream);
 }
 
 .period-tabs button:hover:not(.active) {
-  color: var(--warm-white);
-  background: rgba(255,255,255,0.04);
+  background: var(--green-pale);
+  color: var(--green);
 }
 
-/* ─────────────────────────────────────────
-   KPI CARDS
-───────────────────────────────────────── */
+/* ─── KPI GRID ─── */
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin-bottom: 12px;
 }
-
 @media (max-width: 960px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) { .kpi-grid { grid-template-columns: 1fr; } }
+@media (max-width: 500px) { .kpi-grid { grid-template-columns: 1fr; } }
 
 .kpi-card {
-  background: var(--green-mid);
-  border: 1px solid var(--green-border);
-  border-radius: 14px;
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s cubic-bezier(0.23,1,0.32,1), box-shadow 0.2s;
-  cursor: default;
-}
-
-.kpi-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at top left, var(--glow-color, transparent) 0%, transparent 60%);
-  opacity: 0.18;
-  pointer-events: none;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-top: 3px solid var(--top-color, var(--border-strong));
+  border-radius: 12px;
+  padding: 18px 18px 16px;
+  transition: transform 0.18s cubic-bezier(0.23,1,0.32,1), box-shadow 0.18s;
 }
 
 .kpi-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 20px rgba(30,59,30,0.1);
 }
 
-.kpi-card.coral   { --glow-color: var(--coral); border-top: 2px solid var(--coral); }
-.kpi-card.amber   { --glow-color: var(--amber); border-top: 2px solid var(--amber); }
-.kpi-card.positive{ --glow-color: var(--positive); border-top: 2px solid var(--positive); }
-.kpi-card.negative{ --glow-color: var(--negative); border-top: 2px solid var(--negative); }
-.kpi-card.blue    { --glow-color: var(--blue-soft); border-top: 2px solid var(--blue-soft); }
-.kpi-card.neutral { --glow-color: var(--green-muted); border-top: 2px solid var(--green-muted); }
+.kpi-card.green   { --top-color: var(--green); }
+.kpi-card.coral   { --top-color: var(--coral); }
+.kpi-card.amber   { --top-color: var(--amber); }
+.kpi-card.positive{ --top-color: var(--positive); }
+.kpi-card.negative{ --top-color: var(--negative); }
+.kpi-card.purple  { --top-color: var(--purple); }
 
 .kpi-label {
   font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: var(--warm-muted);
-  margin-bottom: 12px;
+  color: var(--ink-muted);
+  margin-bottom: 10px;
 }
 
 .kpi-value {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -1.5px;
-  color: var(--warm-white);
+  color: var(--ink);
   line-height: 1;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.kpi-value.coral   { color: var(--coral-light); }
-.kpi-value.positive{ color: var(--positive); }
-.kpi-value.negative{ color: var(--negative); }
-.kpi-value.amber   { color: var(--amber); }
+.kpi-value.green    { color: var(--green); }
+.kpi-value.coral    { color: var(--coral); }
+.kpi-value.positive { color: var(--positive); }
+.kpi-value.negative { color: var(--negative); }
+.kpi-value.amber    { color: var(--amber); }
 
 .kpi-sub {
-  font-size: 11.5px;
-  color: var(--warm-muted);
+  font-size: 12px;
+  color: var(--ink-muted);
   margin-bottom: 8px;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
   font-size: 10.5px;
   font-weight: 700;
-  padding: 3px 9px;
+  padding: 2px 9px;
   border-radius: 20px;
   font-family: 'JetBrains Mono', monospace;
-  letter-spacing: 0.02em;
 }
 
-.badge.up       { background: var(--positive-dim); color: var(--positive); }
-.badge.down     { background: var(--negative-dim); color: var(--negative); }
-.badge.warn     { background: var(--amber-dim); color: var(--amber); }
-.badge.neutral  { background: var(--warm-faint); color: var(--warm-muted); }
-.badge.coral    { background: var(--coral-dim); color: var(--coral-light); }
+.badge.up       { background: var(--positive-pale); color: var(--positive); }
+.badge.down     { background: var(--negative-pale); color: var(--negative); }
+.badge.warn     { background: var(--amber-pale); color: var(--amber); }
+.badge.coral    { background: var(--coral-pale); color: var(--coral); }
+.badge.neutral  { background: var(--green-pale); color: var(--green-light); }
+.badge.purple   { background: var(--purple-pale); color: var(--purple); }
 
-/* ─────────────────────────────────────────
-   LAYOUT
-───────────────────────────────────────── */
+/* ─── LAYOUT ─── */
 .grid-2-1 {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 10px;
   margin-bottom: 10px;
 }
-
 .grid-equal {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-bottom: 10px;
 }
-
 @media (max-width: 900px) {
   .grid-2-1, .grid-equal { grid-template-columns: 1fr; }
 }
 
-/* ─────────────────────────────────────────
-   CARDS
-───────────────────────────────────────── */
+/* ─── CARD ─── */
 .card {
-  background: var(--green-mid);
-  border: 1px solid var(--green-border);
-  border-radius: 14px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
   padding: 20px;
+}
+
+.card.green-frame {
+  border-color: var(--border-strong);
+  border-top: 3px solid var(--green);
 }
 
 .card-title {
   font-size: 10.5px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: var(--warm-muted);
+  color: var(--ink-muted);
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.card-chart { position: relative; height: 240px; }
-.card-chart-sm { position: relative; height: 190px; }
+.card-chart   { position: relative; height: 240px; }
+.card-chart-md{ position: relative; height: 200px; }
 
-/* ─────────────────────────────────────────
-   TABLES
-───────────────────────────────────────── */
+/* ─── SECTION LABEL ─── */
+.section-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 10px;
+}
+
+.section-label::before {
+  content: '';
+  width: 4px;
+  height: 14px;
+  background: var(--coral);
+  border-radius: 2px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+/* ─── DATA TABLE ─── */
+.tscroll { overflow-x: auto; }
+
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -315,52 +299,50 @@ body::before {
 
 .data-table th {
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.7px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
-  color: var(--warm-muted);
+  color: var(--ink-muted);
   text-align: left;
-  padding: 0 10px 12px;
-  border-bottom: 1px solid var(--green-border);
+  padding: 0 10px 11px;
+  border-bottom: 1.5px solid var(--border-strong);
+  white-space: nowrap;
 }
 
 .data-table td {
   padding: 11px 10px;
   font-size: 13px;
-  border-bottom: 1px solid rgba(255,255,255,0.035);
+  border-bottom: 1px solid var(--cream-dark);
   vertical-align: middle;
 }
 
 .data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--cream); }
 
-.data-table tr:hover td {
-  background: rgba(255,255,255,0.02);
-}
+.client-name { font-weight: 600; color: var(--ink); }
+.date-cell   { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-muted); }
 
-.client-name {
-  font-weight: 500;
-  color: var(--warm-white);
-}
-
-.amount-cell {
+.amount-col {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 13.5px;
   text-align: right;
   color: var(--amber);
+  white-space: nowrap;
 }
 
-.amount-cell.positive { color: var(--positive); }
-.amount-cell.negative { color: var(--negative); }
+.amount-col.positive { color: var(--positive); }
+.amount-col.negative { color: var(--negative); }
+.amount-col.purple   { color: var(--purple); }
 
 .cat-pill {
   font-size: 10px;
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 20px;
-  background: var(--green-surface);
-  border: 1px solid var(--green-border);
-  color: var(--warm-muted);
+  background: var(--green-pale);
+  color: var(--green-light);
+  border: 1px solid var(--border);
   white-space: nowrap;
 }
 
@@ -373,41 +355,38 @@ body::before {
   font-family: 'JetBrains Mono', monospace;
 }
 
-.status-paid     { background: var(--positive-dim); color: var(--positive); }
-.status-awaiting { background: var(--amber-dim); color: var(--amber); }
-.status-blocked  { background: rgba(255,255,255,0.05); color: var(--warm-muted); }
-.status-pipeline { background: rgba(167,120,210,0.15); color: #c49fe0; }
+.s-paid     { background: var(--positive-pale); color: var(--positive); }
+.s-awaiting { background: var(--amber-pale); color: var(--amber); }
+.s-pipeline { background: var(--purple-pale); color: var(--purple); }
 
-/* TABLE FOOTER TOTAL */
-.table-total {
+/* table footer */
+.table-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 10px 0;
+  padding: 13px 10px 0;
   margin-top: 10px;
-  border-top: 1px solid var(--green-border);
+  border-top: 1.5px solid var(--border-strong);
 }
 
-.table-total .label {
+.table-footer .tf-label {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: var(--warm-muted);
+  color: var(--ink-muted);
 }
 
-.table-total .value {
+.table-footer .tf-value {
   font-family: 'JetBrains Mono', monospace;
   font-size: 18px;
   font-weight: 700;
   color: var(--amber);
 }
 
-.table-total .value.pipeline { color: #c49fe0; }
+.table-footer .tf-value.purple { color: var(--purple); }
 
-/* ─────────────────────────────────────────
-   MONTHLY TABLE
-───────────────────────────────────────── */
+/* ─── MONTHLY TABLE ─── */
 .monthly-table {
   width: 100%;
   border-collapse: collapse;
@@ -415,23 +394,23 @@ body::before {
 
 .monthly-table th {
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.7px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
-  color: var(--warm-muted);
+  color: var(--ink-muted);
   text-align: right;
-  padding: 0 10px 12px;
-  border-bottom: 1px solid var(--green-border);
+  padding: 0 10px 11px;
+  border-bottom: 1.5px solid var(--border-strong);
 }
 
 .monthly-table th:first-child { text-align: left; }
 
 .monthly-table td {
-  padding: 11px 10px;
+  padding: 10px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
   text-align: right;
-  border-bottom: 1px solid rgba(255,255,255,0.035);
+  border-bottom: 1px solid var(--cream-dark);
   font-variant-numeric: tabular-nums;
 }
 
@@ -440,19 +419,17 @@ body::before {
   font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 13px;
-  color: var(--warm-white);
+  color: var(--ink);
 }
 
 .monthly-table tr.ytd-row td {
-  border-top: 1px solid var(--green-muted);
+  border-top: 2px solid var(--green);
   border-bottom: none;
   font-weight: 700;
-  padding-top: 14px;
+  padding-top: 12px;
 }
 
-/* ─────────────────────────────────────────
-   INSIGHTS
-───────────────────────────────────────── */
+/* ─── INSIGHTS ─── */
 .insights-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -463,43 +440,43 @@ body::before {
 @media (max-width: 900px) { .insights-grid { grid-template-columns: 1fr; } }
 
 .insight-card {
-  background: var(--green-mid);
-  border: 1px solid var(--green-border);
-  border-radius: 14px;
-  padding: 18px;
-  border-left: 3px solid var(--line-color, var(--green-muted));
-  transition: transform 0.2s cubic-bezier(0.23,1,0.32,1);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--left-color, var(--border-strong));
+  border-radius: 12px;
+  padding: 16px 18px;
+  transition: transform 0.18s cubic-bezier(0.23,1,0.32,1);
 }
 
 .insight-card:hover { transform: translateY(-2px); }
-.insight-card.win      { --line-color: var(--positive); }
-.insight-card.focus    { --line-color: var(--coral); }
-.insight-card.pipeline { --line-color: #c49fe0; }
-.insight-card.traj     { --line-color: var(--amber); }
+.insight-card.win      { --left-color: var(--positive); background: var(--positive-pale); border-color: rgba(26,107,42,0.15); }
+.insight-card.focus    { --left-color: var(--coral); background: var(--coral-pale); border-color: rgba(207,73,40,0.15); }
+.insight-card.pipeline { --left-color: var(--purple); background: var(--purple-pale); border-color: rgba(124,77,160,0.15); }
+.insight-card.amber    { --left-color: var(--amber); background: var(--amber-pale); border-color: rgba(181,115,10,0.15); }
 
 .insight-tag {
-  font-size: 9px;
+  font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
 .insight-card.win .insight-tag      { color: var(--positive); }
 .insight-card.focus .insight-tag    { color: var(--coral); }
-.insight-card.pipeline .insight-tag { color: #c49fe0; }
-.insight-card.traj .insight-tag     { color: var(--amber); }
+.insight-card.pipeline .insight-tag { color: var(--purple); }
+.insight-card.amber .insight-tag    { color: var(--amber); }
 
 .insight-text {
   font-size: 13px;
   line-height: 1.55;
-  color: var(--warm-white);
+  color: var(--ink);
   font-weight: 400;
 }
 
 .insight-num {
   font-family: 'Fraunces', serif;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 900;
   letter-spacing: -0.03em;
   margin-top: 10px;
@@ -507,28 +484,34 @@ body::before {
 }
 
 .insight-card.win .insight-num      { color: var(--positive); }
-.insight-card.focus .insight-num    { color: var(--coral-light); }
-.insight-card.pipeline .insight-num { color: #c49fe0; }
-.insight-card.traj .insight-num     { color: var(--amber); }
+.insight-card.focus .insight-num    { color: var(--coral); }
+.insight-card.pipeline .insight-num { color: var(--purple); }
+.insight-card.amber .insight-num    { color: var(--amber); }
 
-/* ─────────────────────────────────────────
-   PROGRESS
-───────────────────────────────────────── */
-.progress-group { display: flex; gap: 32px; flex-wrap: wrap; }
+/* ─── PROGRESS ─── */
+.progress-group { display: flex; gap: 28px; flex-wrap: wrap; }
 
-.progress-item { flex: 1; min-width: 160px; }
+.progress-item { flex: 1; min-width: 150px; }
+
+.progress-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 4px;
+}
 
 .progress-label-row {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: var(--warm-muted);
+  color: var(--ink-muted);
   margin-bottom: 6px;
 }
 
 .progress-bar {
-  height: 4px;
-  background: var(--green-surface);
+  height: 5px;
+  background: var(--cream-dark);
   border-radius: 4px;
   overflow: visible;
   position: relative;
@@ -545,214 +528,272 @@ body::before {
 .progress-fill::after {
   content: '';
   position: absolute;
-  right: -1px;
-  top: -2px;
-  width: 8px;
-  height: 8px;
+  right: -3px; top: -3px;
+  width: 11px; height: 11px;
   border-radius: 50%;
   background: inherit;
+  border: 2px solid var(--white);
 }
 
-.progress-fill.coral   { background: var(--coral); }
-.progress-fill.positive{ background: var(--positive); }
-.progress-fill.amber   { background: var(--amber); }
+.progress-fill.green    { background: var(--green); }
+.progress-fill.positive { background: var(--positive); }
+.progress-fill.coral    { background: var(--coral); }
+.progress-fill.amber    { background: var(--amber); }
+.progress-fill.purple   { background: var(--purple); }
 
-.progress-val {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 22px;
+/* ─── MOTIVATIONAL QUOTE ─── */
+.quote-card {
+  background: var(--green);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-card::before {
+  content: '\201C';
+  position: absolute;
+  top: -10px;
+  left: 24px;
+  font-family: 'Fraunces', serif;
+  font-size: 120px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.08);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.quote-text {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: -1px;
-  margin-bottom: 4px;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
 }
 
-/* ─────────────────────────────────────────
-   SECTION LABEL
-───────────────────────────────────────── */
-.section-label {
+.quote-text em {
+  font-style: normal;
+  color: var(--coral-light);
+}
+
+.quote-context {
+  margin-top: 14px;
+  font-size: 12px;
+  color: rgba(245,240,235,0.55);
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── HERO EVENT CARD ─── */
+.hero-event {
+  background: var(--coral-pale);
+  border: 2px solid var(--coral);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-event-left {}
+
+.hero-event-tag {
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--warm-muted);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 24px 0 10px;
+  color: var(--coral);
+  margin-bottom: 6px;
 }
 
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--green-border);
+.hero-event-title {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
-/* ─────────────────────────────────────────
-   PANELS
-───────────────────────────────────────── */
-.period-panel { display: none; }
-.period-panel.active { display: block; }
+.hero-event-desc {
+  font-size: 13px;
+  color: var(--ink-mid);
+  margin-top: 6px;
+  line-height: 1.5;
+}
 
-/* ─────────────────────────────────────────
-   ANIMATIONS
-───────────────────────────────────────── */
-@keyframes fadeSlideDown {
-  from { opacity: 0; transform: translateY(-12px); }
+.hero-event-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.hero-event-amount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--coral);
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+
+.hero-event-sub {
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(8px); }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 .animate-in {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(14px);
 }
 
 .animate-in.visible {
-  animation: fadeSlideUp 0.55s cubic-bezier(0.23,1,0.32,1) forwards;
+  animation: slideUp 0.5s cubic-bezier(0.23,1,0.32,1) var(--delay, 0s) forwards;
 }
 
-/* Stagger delays */
-.delay-1 { animation-delay: 0.05s; }
-.delay-2 { animation-delay: 0.1s; }
-.delay-3 { animation-delay: 0.15s; }
-.delay-4 { animation-delay: 0.2s; }
-.delay-5 { animation-delay: 0.25s; }
-.delay-6 { animation-delay: 0.3s; }
+.d1 { --delay: 0.04s; }
+.d2 { --delay: 0.08s; }
+.d3 { --delay: 0.12s; }
+.d4 { --delay: 0.16s; }
+.d5 { --delay: 0.20s; }
+.d6 { --delay: 0.24s; }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-in { animation: none !important; opacity: 1; transform: none; }
-  .period-tabs, .header { animation: none !important; opacity: 1; transform: none; }
+  .header, .period-tabs { animation: none !important; opacity: 1; }
 }
 
-/* ─────────────────────────────────────────
-   SPOTLIGHT CARD EFFECT
-───────────────────────────────────────── */
-.spotlight {
-  position: relative;
-  overflow: hidden;
-}
+/* ─── PANELS ─── */
+.period-panel { display: none; }
+.period-panel.active { display: block; }
 
-.spotlight::before {
-  content: '';
+/* ─── CHART CENTER ─── */
+.donut-wrap { position: relative; }
+.donut-center {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(600px circle at var(--mouse-x, -200px) var(--mouse-y, -200px), rgba(207,73,40,0.08), transparent 40%);
-  pointer-events: none;
-  z-index: 0;
-  transition: opacity 0.3s;
-}
-
-/* ─────────────────────────────────────────
-   CHART CONTAINER LABEL
-───────────────────────────────────────── */
-.chart-center-label {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   pointer-events: none;
 }
 
-.chart-center-label .big {
+.donut-center .dc-val {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
+  color: var(--ink);
   letter-spacing: -0.5px;
-  color: var(--warm-white);
 }
 
-.chart-center-label .small {
-  font-size: 10px;
-  color: var(--warm-muted);
+.donut-center .dc-lbl {
+  font-size: 9.5px;
+  color: var(--ink-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-/* ─────────────────────────────────────────
-   DIVIDER
-───────────────────────────────────────── */
-.coral-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--coral);
-  margin-right: 6px;
-  vertical-align: middle;
+/* ─── NOTE TEXT ─── */
+.note {
+  font-size: 10.5px;
+  color: var(--ink-muted);
+  padding: 10px 10px 0;
+  font-style: italic;
 }
-
-/* ─────────────────────────────────────────
-   TABLE SCROLL WRAP
-───────────────────────────────────────── */
-.tscroll { overflow-x: auto; }
 </style>
 </head>
 <body>
-
 <div class="page">
 
   <!-- HEADER -->
   <div class="header">
-    <div class="header-left">
-      <h1 class="fraunces">The Dinner Club <span>SG</span></h1>
-      <div class="tagline">P&amp;L Dashboard &nbsp;·&nbsp; Stefan Kam</div>
+    <div>
+      <h1>The Dinner Club <em>SG</em></h1>
+      <div class="header-sub">P&amp;L Dashboard · Stefan Kam</div>
     </div>
-    <div class="header-right">
-      <div class="as-of">17 Apr 2026</div>
-    </div>
+    <div class="as-of">17 Apr 2026</div>
   </div>
 
-  <!-- PERIOD TABS -->
+  <!-- TABS -->
   <div class="period-tabs">
-    <button onclick="showPeriod('weekly')" id="tab-weekly">This Week</button>
-    <button onclick="showPeriod('monthly')" id="tab-monthly" class="active">This Month</button>
-    <button onclick="showPeriod('alltime')" id="tab-alltime">All Time</button>
+    <button onclick="switchTab('weekly')" id="tab-weekly">This Week</button>
+    <button onclick="switchTab('monthly')" id="tab-monthly" class="active">This Month</button>
+    <button onclick="switchTab('alltime')" id="tab-alltime">All Time</button>
   </div>
 
 
-  <!-- ══════════════════════════════════════
-       THIS WEEK
-  ══════════════════════════════════════ -->
+  <!-- ══════════ THIS WEEK ══════════ -->
   <div class="period-panel" id="panel-weekly">
 
+    <!-- Motivational quote -->
+    <div class="quote-card animate-in d1">
+      <div class="quote-text">
+        The table's set. The work is done.<br>
+        Now it's just about <em>who pays first.</em>
+      </div>
+      <div class="quote-context">Week of 14–20 April 2026 &nbsp;·&nbsp; $5,972 invoiced &nbsp;·&nbsp; $1,500 collected</div>
+    </div>
+
+    <!-- Hero event — most important thing this week -->
+    <div class="hero-event animate-in d2">
+      <div class="hero-event-left">
+        <div class="hero-event-tag">Chase this now</div>
+        <div class="hero-event-title">Casa Cicheti</div>
+        <div class="hero-event-desc">Collab invoice sent 15 Apr. Biggest open invoice this week.<br>One follow-up away from collecting.</div>
+      </div>
+      <div class="hero-event-right">
+        <div class="hero-event-amount">$3,597</div>
+        <div class="hero-event-sub">In progress — awaiting payment</div>
+      </div>
+    </div>
+
+    <!-- KPI row -->
     <div class="kpi-grid">
-      <div class="kpi-card amber animate-in delay-1">
-        <div class="kpi-label">Invoiced This Week</div>
+      <div class="kpi-card amber animate-in d1">
+        <div class="kpi-label">Invoiced this week</div>
         <div class="kpi-value amber mono" data-countup="5972">$5,972</div>
         <div class="kpi-sub">Apr 14–16, 2026</div>
         <span class="badge neutral">4 invoices</span>
       </div>
-      <div class="kpi-card positive animate-in delay-2">
+      <div class="kpi-card positive animate-in d2">
         <div class="kpi-label">Collected</div>
         <div class="kpi-value positive mono" data-countup="1500">$1,500</div>
         <div class="kpi-sub">a secret wine bar 2/2</div>
         <span class="badge up">Paid</span>
       </div>
-      <div class="kpi-card amber animate-in delay-3">
-        <div class="kpi-label">Awaiting Payment</div>
+      <div class="kpi-card amber animate-in d3">
+        <div class="kpi-label">Awaiting payment</div>
         <div class="kpi-value amber mono" data-countup="4472">$4,472</div>
         <div class="kpi-sub">3 invoices sent</div>
-        <span class="badge warn">Chase</span>
+        <span class="badge warn">Pending</span>
       </div>
-      <div class="kpi-card coral animate-in delay-4">
-        <div class="kpi-label">Biggest Invoice</div>
-        <div class="kpi-value coral mono" data-countup="3597">$3,597</div>
-        <div class="kpi-sub">Casa Cicheti — Collab</div>
-        <span class="badge coral">In progress</span>
+      <div class="kpi-card green animate-in d4">
+        <div class="kpi-label">April so far</div>
+        <div class="kpi-value positive mono" data-countup="13304">+$13,304</div>
+        <div class="kpi-sub">Net P&L month-to-date</div>
+        <span class="badge up">Best month</span>
       </div>
     </div>
 
-    <div class="section-label">This Week's Invoices</div>
+    <div class="section-label">This week's invoices</div>
     <div class="card animate-in">
       <div class="tscroll">
         <table class="data-table">
@@ -767,130 +808,128 @@ body::before {
           </thead>
           <tbody>
             <tr>
-              <td class="client-name">a secret wine bar pop-up 2/2</td>
-              <td><span class="cat-pill">Collab</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">14 Apr</td>
-              <td><span class="status-pill status-paid">Paid</span></td>
-              <td class="amount-cell positive">$1,500.00</td>
-            </tr>
-            <tr>
               <td class="client-name">Casa Cicheti</td>
               <td><span class="cat-pill">Collab</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">15 Apr</td>
-              <td><span class="status-pill status-awaiting">Awaiting</span></td>
-              <td class="amount-cell">$3,597.48</td>
+              <td class="date-cell">15 Apr</td>
+              <td><span class="status-pill s-awaiting">Awaiting</span></td>
+              <td class="amount-col">$3,597.48</td>
             </tr>
             <tr>
               <td class="client-name">Tan Private Dining (50% Deposit)</td>
               <td><span class="cat-pill">Dinner Party</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">15 Apr</td>
-              <td><span class="status-pill status-awaiting">Awaiting</span></td>
-              <td class="amount-cell">$800.00</td>
+              <td class="date-cell">15 Apr</td>
+              <td><span class="status-pill s-awaiting">Awaiting</span></td>
+              <td class="amount-col">$800.00</td>
             </tr>
             <tr>
               <td class="client-name">GRAPEVIBES — Bread Delivery</td>
               <td><span class="cat-pill">Freelance</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">15 Apr</td>
-              <td><span class="status-pill status-awaiting">Awaiting</span></td>
-              <td class="amount-cell">$75.00</td>
+              <td class="date-cell">15 Apr</td>
+              <td><span class="status-pill s-awaiting">Awaiting</span></td>
+              <td class="amount-col">$75.00</td>
+            </tr>
+            <tr>
+              <td class="client-name">a secret wine bar pop-up 2/2</td>
+              <td><span class="cat-pill">Collab</span></td>
+              <td class="date-cell">14 Apr</td>
+              <td><span class="status-pill s-paid">Paid</span></td>
+              <td class="amount-col positive">$1,500.00</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="table-total">
-        <span class="label">Week total</span>
-        <span class="value">$5,972.48</span>
+      <div class="table-footer">
+        <span class="tf-label">Week total</span>
+        <span class="tf-value">$5,972.48</span>
       </div>
     </div>
 
-    <div class="section-label">Wins &amp; Focus</div>
-    <div class="insights-grid" style="grid-template-columns: repeat(2,1fr)">
-      <div class="insight-card win animate-in delay-1">
+    <div class="section-label">Wins this week</div>
+    <div class="insights-grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="insight-card win animate-in d1">
         <div class="insight-tag">Win</div>
-        <div class="insight-text">a secret wine bar collab fully closed. Both invoices landed — $5,500 total across the week.</div>
+        <div class="insight-text">a secret wine bar collab fully closed. Both invoices collected. $5,500 total from one event.</div>
         <div class="insight-num">$5,500</div>
       </div>
-      <div class="insight-card focus animate-in delay-2">
-        <div class="insight-tag">Chase now</div>
-        <div class="insight-text">Casa Cicheti is your biggest open invoice right now. One follow-up away from $3,597 in the bank.</div>
-        <div class="insight-num">$3,597</div>
+      <div class="insight-card focus animate-in d2">
+        <div class="insight-tag">Follow up today</div>
+        <div class="insight-text">Andsfood consulting invoice has been open since 31 March. $3,200 — send a reminder now.</div>
+        <div class="insight-num">$3,200</div>
       </div>
     </div>
   </div>
 
 
-  <!-- ══════════════════════════════════════
-       THIS MONTH
-  ══════════════════════════════════════ -->
+  <!-- ══════════ THIS MONTH ══════════ -->
   <div class="period-panel active" id="panel-monthly">
 
     <div class="kpi-grid">
-      <div class="kpi-card positive animate-in delay-1">
+      <div class="kpi-card positive animate-in d1">
         <div class="kpi-label">Revenue — April</div>
-        <div class="kpi-value positive mono" data-countup="16377">$16,377</div>
-        <div class="kpi-sub">Paid + invoiced</div>
-        <span class="badge up">+69% vs Mar</span>
+        <div class="kpi-value positive mono" data-countup="19477">$19,477</div>
+        <div class="kpi-sub">All invoices incl. pipeline</div>
+        <span class="badge up">+101% vs Mar</span>
       </div>
-      <div class="kpi-card coral animate-in delay-2">
+      <div class="kpi-card coral animate-in d2">
         <div class="kpi-label">Expenses — April</div>
-        <div class="kpi-value coral mono" data-countup="12347">$12,347</div>
-        <div class="kpi-sub">All costs this month</div>
+        <div class="kpi-value coral mono" data-countup="6174">$6,174</div>
+        <div class="kpi-sub">Per Year Overview</div>
         <span class="badge up">−54% vs Mar</span>
       </div>
-      <div class="kpi-card positive animate-in delay-3">
+      <div class="kpi-card positive animate-in d3">
         <div class="kpi-label">Net P&L — April</div>
-        <div class="kpi-value positive mono">+$4,030</div>
-        <div class="kpi-sub">First profitable month</div>
-        <span class="badge up">Turned positive</span>
+        <div class="kpi-value positive mono">+$13,304</div>
+        <div class="kpi-sub">Best month ever</div>
+        <span class="badge up">Record</span>
       </div>
-      <div class="kpi-card amber animate-in delay-4">
-        <div class="kpi-label">Pending Payment</div>
+      <div class="kpi-card amber animate-in d4">
+        <div class="kpi-label">Awaiting payment</div>
         <div class="kpi-value amber mono" data-countup="8822">$8,822</div>
-        <div class="kpi-sub">8 invoices outstanding</div>
+        <div class="kpi-sub">6 invoices outstanding</div>
         <span class="badge warn">Chase these</span>
       </div>
     </div>
 
-    <!-- April target -->
-    <div class="card animate-in" style="margin-bottom:10px">
-      <div class="card-title">April vs $10K monthly target &nbsp;<span style="color:var(--warm-muted);font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">Day 17 of 30</span></div>
+    <!-- April target progress -->
+    <div class="card green-frame animate-in" style="margin-bottom:10px">
+      <div class="card-title">April vs $10K monthly target &nbsp;<span style="color:var(--ink-muted);font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">Day 17 of 30</span></div>
       <div class="progress-group">
         <div class="progress-item">
-          <div class="progress-val mono" style="color:var(--positive)">$7,555</div>
+          <div class="progress-val" style="color:var(--positive)">$7,555</div>
           <div class="progress-label-row">
-            <span>Paid &amp; collected</span>
-            <span style="color:var(--positive);font-weight:600">76%</span>
+            <span>Cash collected</span>
+            <span style="color:var(--positive);font-weight:700">76%</span>
           </div>
-          <div class="progress-bar"><div class="progress-fill positive" data-width="76"></div></div>
+          <div class="progress-bar"><div class="progress-fill positive" data-pct="76"></div></div>
         </div>
         <div class="progress-item">
-          <div class="progress-val mono" style="color:var(--warm-white)">$16,377</div>
+          <div class="progress-val" style="color:var(--green)">$16,377</div>
           <div class="progress-label-row">
             <span>Paid + invoiced</span>
-            <span style="color:var(--positive);font-weight:600">164%</span>
+            <span style="color:var(--positive);font-weight:700">164%</span>
           </div>
-          <div class="progress-bar"><div class="progress-fill positive" data-width="100"></div></div>
+          <div class="progress-bar"><div class="progress-fill green" data-pct="100"></div></div>
         </div>
         <div class="progress-item">
-          <div class="progress-val mono" style="color:#c49fe0">$3,100</div>
+          <div class="progress-val" style="color:var(--purple)">$3,100</div>
           <div class="progress-label-row">
             <span>Pipeline (not yet invoiced)</span>
-            <span style="color:#c49fe0;font-weight:600">forecast</span>
+            <span style="color:var(--purple);font-weight:700">forecast</span>
           </div>
-          <div class="progress-bar"><div class="progress-fill" style="background:#c49fe0" data-width="31"></div></div>
+          <div class="progress-bar"><div class="progress-fill purple" data-pct="31"></div></div>
         </div>
       </div>
     </div>
 
     <!-- Charts -->
-    <div class="grid-2-1 animate-in" style="margin-bottom:10px">
+    <div class="grid-2-1 animate-in">
       <div class="card">
         <div class="card-title">April revenue by category</div>
-        <div class="card-chart" style="position:relative">
+        <div class="card-chart donut-wrap">
           <canvas id="aprCatChart"></canvas>
-          <div class="chart-center-label">
-            <div class="big">$16.4K</div>
-            <div class="small">invoiced</div>
+          <div class="donut-center">
+            <div class="dc-val">$16.4K</div>
+            <div class="dc-lbl">invoiced</div>
           </div>
         </div>
       </div>
@@ -903,7 +942,7 @@ body::before {
     </div>
 
     <!-- Pending invoices -->
-    <div class="section-label">Pending invoices</div>
+    <div class="section-label">Pending invoices — awaiting payment</div>
     <div class="card animate-in">
       <div class="tscroll">
         <table class="data-table">
@@ -918,53 +957,53 @@ body::before {
           </thead>
           <tbody>
             <tr>
-              <td class="client-name">Andsfood</td>
+              <td class="client-name" style="color:var(--coral);font-weight:700">Andsfood</td>
               <td><span class="cat-pill">Consulting</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">31 Mar</td>
-              <td><span class="status-pill status-awaiting">Awaiting</span></td>
-              <td class="amount-cell">$3,200.00</td>
+              <td class="date-cell">31 Mar</td>
+              <td><span class="status-pill s-awaiting">Awaiting</span></td>
+              <td class="amount-col">$3,200.00</td>
             </tr>
             <tr>
-              <td class="client-name">Casa Cicheti</td>
+              <td class="client-name" style="color:var(--coral);font-weight:700">Casa Cicheti</td>
               <td><span class="cat-pill">Collab</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">15 Apr</td>
-              <td><span class="status-pill status-awaiting">Awaiting</span></td>
-              <td class="amount-cell">$3,597.48</td>
+              <td class="date-cell">15 Apr</td>
+              <td><span class="status-pill s-awaiting">Awaiting</span></td>
+              <td class="amount-col">$3,597.48</td>
             </tr>
             <tr>
               <td class="client-name">Tan Private Dining (50% Deposit)</td>
               <td><span class="cat-pill">Dinner Party</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">15 Apr</td>
-              <td><span class="status-pill status-awaiting">Awaiting</span></td>
-              <td class="amount-cell">$800.00</td>
+              <td class="date-cell">15 Apr</td>
+              <td><span class="status-pill s-awaiting">Awaiting</span></td>
+              <td class="amount-col">$800.00</td>
             </tr>
             <tr>
               <td class="client-name">Lee Hish LEK (50% Deposit)</td>
               <td><span class="cat-pill">Dinner Party</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">13 Apr</td>
-              <td><span class="status-pill status-awaiting">Awaiting</span></td>
-              <td class="amount-cell">$600.00</td>
+              <td class="date-cell">13 Apr</td>
+              <td><span class="status-pill s-awaiting">Awaiting</span></td>
+              <td class="amount-col">$600.00</td>
             </tr>
             <tr>
               <td class="client-name">Oatside</td>
               <td><span class="cat-pill">Freelance</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">30 Mar</td>
-              <td><span class="status-pill status-awaiting">Awaiting</span></td>
-              <td class="amount-cell">$400.00</td>
+              <td class="date-cell">30 Mar</td>
+              <td><span class="status-pill s-awaiting">Awaiting</span></td>
+              <td class="amount-col">$400.00</td>
             </tr>
             <tr>
-              <td class="client-name">GRAPEVIBES — Bread ×3 deliveries</td>
+              <td class="client-name">GRAPEVIBES — Bread ×3</td>
               <td><span class="cat-pill">Freelance</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">Apr 2–15</td>
-              <td><span class="status-pill status-awaiting">Awaiting</span></td>
-              <td class="amount-cell">$225.00</td>
+              <td class="date-cell">Apr 2–15</td>
+              <td><span class="status-pill s-awaiting">Awaiting</span></td>
+              <td class="amount-col">$225.00</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="table-total">
-        <span class="label">Total awaiting</span>
-        <span class="value">$8,822.48</span>
+      <div class="table-footer">
+        <span class="tf-label">Total awaiting</span>
+        <span class="tf-value">$8,822.48</span>
       </div>
     </div>
 
@@ -985,104 +1024,100 @@ body::before {
             <tr>
               <td class="client-name">Revolution Wine Bar</td>
               <td><span class="cat-pill">Collab</span></td>
-              <td style="color:var(--warm-muted);font-size:12px">TBD</td>
-              <td class="amount-cell" style="color:#c49fe0">$1,500.00</td>
+              <td style="color:var(--ink-muted);font-size:12px">TBD</td>
+              <td class="amount-col purple">$1,500.00</td>
             </tr>
             <tr>
               <td class="client-name">Tan Private Dining (50% Remaining)</td>
               <td><span class="cat-pill">Dinner Party</span></td>
-              <td style="color:var(--warm-muted);font-size:12px">Post-event</td>
-              <td class="amount-cell" style="color:#c49fe0">$800.00</td>
+              <td style="color:var(--ink-muted);font-size:12px">Post-event</td>
+              <td class="amount-col purple">$800.00</td>
             </tr>
             <tr>
               <td class="client-name">Lee Hish LEK (50% Remaining)</td>
               <td><span class="cat-pill">Dinner Party</span></td>
-              <td class="mono" style="font-size:12px;color:var(--warm-muted)">30 Apr</td>
-              <td class="amount-cell" style="color:#c49fe0">$650.00</td>
+              <td class="date-cell">30 Apr</td>
+              <td class="amount-col purple">$650.00</td>
             </tr>
             <tr>
               <td class="client-name">GRAPEVIBES — Bread ×2</td>
               <td><span class="cat-pill">Freelance</span></td>
-              <td style="color:var(--warm-muted);font-size:12px">Recurring</td>
-              <td class="amount-cell" style="color:#c49fe0">$150.00</td>
+              <td style="color:var(--ink-muted);font-size:12px">Recurring</td>
+              <td class="amount-col purple">$150.00</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="table-total">
-        <span class="label">Pipeline total</span>
-        <span class="value pipeline">$3,100.00</span>
+      <div class="table-footer">
+        <span class="tf-label">Pipeline total</span>
+        <span class="tf-value purple">$3,100.00</span>
       </div>
     </div>
 
-    <!-- Insights -->
     <div class="section-label">Insights</div>
     <div class="insights-grid">
-      <div class="insight-card win animate-in delay-1">
+      <div class="insight-card win animate-in d1">
         <div class="insight-tag">Win</div>
-        <div class="insight-text">First profitable month since launch. April's not even half done.</div>
-        <div class="insight-num">+$4,030</div>
+        <div class="insight-text">Best month on record. April is only 17 days in and it's already double any previous month.</div>
+        <div class="insight-num">+$13,304</div>
       </div>
-      <div class="insight-card win animate-in delay-2">
+      <div class="insight-card win animate-in d2">
         <div class="insight-tag">Win</div>
-        <div class="insight-text">Revenue nearly doubled from last month. Mar was $9.7K — April hit $16.4K in 17 days.</div>
-        <div class="insight-num">+69%</div>
+        <div class="insight-text">Expenses dropped to $6K while revenue doubled. The margin is finally working in your favour.</div>
+        <div class="insight-num">−54% costs</div>
       </div>
-      <div class="insight-card focus animate-in delay-3">
+      <div class="insight-card focus animate-in d3">
         <div class="insight-tag">Focus</div>
-        <div class="insight-text">$8,822 sitting in unpaid invoices. Andsfood + Casa Cicheti alone = $6,797. One email each.</div>
-        <div class="insight-num">$8,822</div>
+        <div class="insight-text">Andsfood + Casa Cicheti = $6,797 sitting in limbo. Both invoiced. Chase both this week.</div>
+        <div class="insight-num">$6,797</div>
       </div>
     </div>
   </div>
 
 
-  <!-- ══════════════════════════════════════
-       ALL TIME
-  ══════════════════════════════════════ -->
+  <!-- ══════════ ALL TIME ══════════ -->
   <div class="period-panel" id="panel-alltime">
 
     <div class="kpi-grid">
-      <div class="kpi-card blue animate-in delay-1">
+      <div class="kpi-card green animate-in d1">
         <div class="kpi-label">YTD Revenue</div>
-        <div class="kpi-value mono" style="color:var(--blue-soft)" data-countup="41521">$41,521</div>
+        <div class="kpi-value green mono" data-countup="44621">$44,621</div>
         <div class="kpi-sub">Jan – Apr 2026</div>
       </div>
-      <div class="kpi-card coral animate-in delay-2">
+      <div class="kpi-card coral animate-in d2">
         <div class="kpi-label">YTD Expenses</div>
-        <div class="kpi-value coral mono" data-countup="84239">$84,239</div>
+        <div class="kpi-value coral mono" data-countup="42119">$42,119</div>
         <div class="kpi-sub">Jan – Apr 2026</div>
       </div>
-      <div class="kpi-card negative animate-in delay-3">
+      <div class="kpi-card positive animate-in d3">
         <div class="kpi-label">YTD Net P&L</div>
-        <div class="kpi-value negative mono">−$42,718</div>
-        <div class="kpi-sub">Investment phase</div>
-        <span class="badge neutral">Building</span>
+        <div class="kpi-value positive mono">+$2,502</div>
+        <div class="kpi-sub">Profitable YTD</div>
+        <span class="badge up">In the green</span>
       </div>
-      <div class="kpi-card positive animate-in delay-4">
-        <div class="kpi-label">Apr Breakthrough</div>
-        <div class="kpi-value positive mono">+$4,030</div>
-        <div class="kpi-sub">First profitable month</div>
-        <span class="badge up">Turning</span>
+      <div class="kpi-card positive animate-in d4">
+        <div class="kpi-label">Best Month</div>
+        <div class="kpi-value positive mono">+$13,304</div>
+        <div class="kpi-sub">April 2026</div>
+        <span class="badge up">Record</span>
       </div>
     </div>
 
-    <!-- Main P&L chart -->
-    <div class="card animate-in" style="margin-bottom:10px">
+    <div class="card green-frame animate-in" style="margin-bottom:10px">
       <div class="card-title">Monthly revenue vs expenses vs net P&L</div>
       <div class="card-chart" style="height:270px">
         <canvas id="mainPLChart"></canvas>
       </div>
     </div>
 
-    <div class="grid-equal animate-in" style="margin-bottom:10px">
+    <div class="grid-equal animate-in">
       <div class="card">
-        <div class="card-title">Revenue by category — YTD <span style="color:var(--warm-muted);font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">Paid + invoiced</span></div>
-        <div class="card-chart" style="position:relative;height:220px">
+        <div class="card-title">Revenue by category — YTD</div>
+        <div class="card-chart-md donut-wrap">
           <canvas id="ytdCatChart"></canvas>
-          <div class="chart-center-label">
-            <div class="big">$41.5K</div>
-            <div class="small">YTD</div>
+          <div class="donut-center">
+            <div class="dc-val">$44.6K</div>
+            <div class="dc-lbl">YTD</div>
           </div>
         </div>
       </div>
@@ -1101,139 +1136,93 @@ body::before {
           <tbody>
             <tr>
               <td>Jan</td>
-              <td style="color:var(--blue-soft)">$8,057</td>
-              <td style="color:var(--coral)">$18,557</td>
-              <td style="color:var(--negative)">−$10,500</td>
+              <td style="color:var(--green)">$8,057</td>
+              <td style="color:var(--coral)">$9,279</td>
+              <td style="color:var(--negative)">−$1,221</td>
             </tr>
             <tr>
               <td>Feb</td>
-              <td style="color:var(--blue-soft)">$7,404</td>
-              <td style="color:var(--coral)">$26,298</td>
-              <td style="color:var(--negative)">−$18,894</td>
+              <td style="color:var(--green)">$7,404</td>
+              <td style="color:var(--coral)">$13,149</td>
+              <td style="color:var(--negative)">−$5,745</td>
             </tr>
             <tr>
               <td>Mar</td>
-              <td style="color:var(--blue-soft)">$9,683</td>
-              <td style="color:var(--coral)">$27,037</td>
-              <td style="color:var(--negative)">−$17,353</td>
+              <td style="color:var(--green)">$9,683</td>
+              <td style="color:var(--coral)">$13,518</td>
+              <td style="color:var(--negative)">−$3,835</td>
             </tr>
             <tr>
               <td>Apr *</td>
-              <td style="color:var(--blue-soft)">$16,377</td>
-              <td style="color:var(--coral)">$12,347</td>
-              <td style="color:var(--positive)">+$4,030</td>
+              <td style="color:var(--green)">$19,477</td>
+              <td style="color:var(--coral)">$6,174</td>
+              <td style="color:var(--positive)">+$13,304</td>
             </tr>
             <tr class="ytd-row">
               <td>YTD</td>
-              <td style="color:var(--blue-soft)">$41,521</td>
-              <td style="color:var(--coral)">$84,239</td>
-              <td style="color:var(--negative)">−$42,718</td>
+              <td style="color:var(--green);font-weight:700">$44,621</td>
+              <td style="color:var(--coral);font-weight:700">$42,119</td>
+              <td style="color:var(--positive);font-weight:700">+$2,502</td>
             </tr>
           </tbody>
         </table>
-        <div style="padding:12px 10px 0;font-size:10.5px;color:var(--warm-muted)">* Apr includes in-progress invoices. Cash collected only: $7,555.</div>
+        <div class="note">* Apr includes pipeline (not yet invoiced). Source: 2026 Year Overview tab.</div>
       </div>
     </div>
 
-    <!-- Insights -->
     <div class="section-label">Insights</div>
     <div class="insights-grid">
-      <div class="insight-card win animate-in delay-1">
-        <div class="insight-tag">Win</div>
-        <div class="insight-text">Collabs are the highest-value category — Secret Wine Bar, Bjorn Shen, Casa Cicheti. Keep building this.</div>
-        <div class="insight-num">$13.2K</div>
+      <div class="insight-card win animate-in d1">
+        <div class="insight-tag">Milestone</div>
+        <div class="insight-text">The business is profitable YTD. Three months of investment paid off in April alone.</div>
+        <div class="insight-num">+$2,502</div>
       </div>
-      <div class="insight-card win animate-in delay-2">
-        <div class="insight-tag">Trajectory</div>
-        <div class="insight-text">At April's 17-day pace, you're on track for $29–30K this month. That's a different business.</div>
-        <div class="insight-num">$16K / 17d</div>
+      <div class="insight-card win animate-in d2">
+        <div class="insight-tag">Best Category</div>
+        <div class="insight-text">Collabs are your highest-value play. Secret Wine Bar, Bjorn Shen, Casa Cicheti — keep stacking these.</div>
+        <div class="insight-num">$13.2K YTD</div>
       </div>
-      <div class="insight-card focus animate-in delay-3">
+      <div class="insight-card focus animate-in d3">
         <div class="insight-tag">Focus</div>
-        <div class="insight-text">Expenses peaked at $27K in March, halved to $12K in April. This is the lever. Hold it.</div>
-        <div class="insight-num">−54%</div>
+        <div class="insight-text">Expenses halved in April. Jan–Mar average was $11.7K/mo. Hold April's discipline into May.</div>
+        <div class="insight-num">$6.2K Apr</div>
       </div>
-      <div class="insight-card pipeline animate-in delay-4">
+      <div class="insight-card pipeline animate-in d4">
         <div class="insight-tag">Pipeline</div>
-        <div class="insight-text">Revolution Wine Bar + Tan + Lee Hish remaining = $3,100 not yet invoiced. Trigger when ready.</div>
+        <div class="insight-text">Revolution Wine Bar + Tan + Lee Hish remaining = $3,100 ready to invoice when triggered.</div>
         <div class="insight-num">$3,100</div>
       </div>
-      <div class="insight-card traj animate-in delay-5">
-        <div class="insight-tag">Focus</div>
-        <div class="insight-text">Dinner Parties are consistent — $1,100–2,000 each. More bookings = a reliable base layer of revenue.</div>
-        <div class="insight-num">$10.8K YTD</div>
+      <div class="insight-card amber animate-in d5">
+        <div class="insight-tag">Growth</div>
+        <div class="insight-text">Revenue is growing every month. Apr is 2× March. If May holds pace, you're building something real.</div>
+        <div class="insight-num">+101% MoM</div>
       </div>
-      <div class="insight-card win animate-in delay-6">
-        <div class="insight-tag">Milestone</div>
-        <div class="insight-text">3 months of investment, then April turns profitable. Rolling 30-day breakeven is here.</div>
-        <div class="insight-num">Breakeven</div>
+      <div class="insight-card win animate-in d6">
+        <div class="insight-tag">Dinner Parties</div>
+        <div class="insight-text">Consistent $1.1–2K per event. The most repeatable revenue you have — book the calendar out.</div>
+        <div class="insight-num">$10.8K YTD</div>
       </div>
     </div>
   </div>
 
 </div><!-- /page -->
-
 <script>
-/* ─────────────────── CHART DEFAULTS ─────────────────── */
-Chart.defaults.color = 'rgba(245,240,235,0.4)';
-Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+/* ── CHARTS ── */
+const G_GREEN  = '#1E3B1E';
+const G_GREEN2 = '#4A6741';
+const G_CORAL  = '#CF4928';
+const G_AMBER  = '#B5730A';
+const G_POS    = '#1A6B2A';
+const G_NEG    = '#C03030';
+const G_PURPLE = '#7C4DA0';
+const G_BLUE   = '#2A6080';
+
+Chart.defaults.color = '#888';
+Chart.defaults.borderColor = 'rgba(30,59,30,0.1)';
 Chart.defaults.font.family = "'JetBrains Mono', monospace";
 Chart.defaults.font.size = 11;
 
-const c = v => '$' + Math.round(v).toLocaleString('en-SG');
-
-/* ─────────────────── SPOTLIGHT EFFECT ─────────────────── */
-document.querySelectorAll('.spotlight').forEach(el => {
-  el.addEventListener('mousemove', e => {
-    const r = el.getBoundingClientRect();
-    el.style.setProperty('--mouse-x', (e.clientX - r.left) + 'px');
-    el.style.setProperty('--mouse-y', (e.clientY - r.top) + 'px');
-  });
-});
-
-/* ─────────────────── PROGRESS BARS ─────────────────── */
-function animateProgressBars() {
-  document.querySelectorAll('.progress-fill[data-width]').forEach(el => {
-    el.style.width = el.dataset.width + '%';
-  });
-}
-
-/* ─────────────────── COUNT-UP ─────────────────── */
-function countUp(el, target, duration = 900) {
-  const start = performance.now();
-  const update = now => {
-    const t = Math.min((now - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - t, 3);
-    const val = Math.round(ease * target);
-    el.textContent = '$' + val.toLocaleString('en-SG');
-    if (t < 1) requestAnimationFrame(update);
-  };
-  requestAnimationFrame(update);
-}
-
-/* ─────────────────── INTERSECTION OBSERVER ─────────────────── */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      // count-up on KPI values
-      e.target.querySelectorAll('[data-countup]').forEach(v => {
-        countUp(v, +v.dataset.countup);
-      });
-      obs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll('.animate-in').forEach(el => obs.observe(el));
-
-/* ─────────────────── CHARTS ─────────────────── */
-const CORAL  = '#CF4928';
-const GREEN  = '#5dbd7a';
-const BLUE   = '#6ba3be';
-const AMBER  = '#D4860A';
-const PURPLE = '#c49fe0';
-const RED    = '#e05a5a';
+const fmt = v => '$' + Math.round(Math.abs(v)).toLocaleString('en-SG');
 
 /* Main P&L */
 new Chart(document.getElementById('mainPLChart'), {
@@ -1241,173 +1230,166 @@ new Chart(document.getElementById('mainPLChart'), {
     labels: ['Jan', 'Feb', 'Mar', 'Apr *'],
     datasets: [
       {
-        type: 'bar',
-        label: 'Revenue',
-        data: [8057, 7404, 9683, 16377],
-        backgroundColor: 'rgba(107,163,190,0.55)',
-        borderColor: BLUE,
-        borderWidth: 1,
-        borderRadius: 5,
-        order: 2
+        type: 'bar', label: 'Revenue',
+        data: [8057, 7404, 9683, 19477],
+        backgroundColor: 'rgba(30,59,30,0.55)',
+        borderColor: G_GREEN, borderWidth: 1.5, borderRadius: 5, order: 2
       },
       {
-        type: 'bar',
-        label: 'Expenses',
-        data: [18557, 26298, 27037, 12347],
-        backgroundColor: 'rgba(207,73,40,0.4)',
-        borderColor: CORAL,
-        borderWidth: 1,
-        borderRadius: 5,
-        order: 3
+        type: 'bar', label: 'Expenses',
+        data: [9279, 13149, 13518, 6174],
+        backgroundColor: 'rgba(207,73,40,0.45)',
+        borderColor: G_CORAL, borderWidth: 1.5, borderRadius: 5, order: 3
       },
       {
-        type: 'line',
-        label: 'Net P&L',
-        data: [-10500, -18894, -17353, 4030],
-        borderColor: GREEN,
+        type: 'line', label: 'Net P&L',
+        data: [-1221, -5745, -3835, 13304],
+        borderColor: G_POS,
         backgroundColor: 'transparent',
-        pointBackgroundColor: d => d.raw >= 0 ? GREEN : RED,
-        pointBorderColor: d => d.raw >= 0 ? GREEN : RED,
-        pointRadius: 6,
-        pointHoverRadius: 8,
-        borderWidth: 2,
-        tension: 0.35,
-        order: 1
+        pointBackgroundColor: ctx => ctx.raw >= 0 ? G_POS : G_NEG,
+        pointBorderColor: ctx => ctx.raw >= 0 ? G_POS : G_NEG,
+        pointRadius: 6, pointHoverRadius: 8,
+        borderWidth: 2.5, tension: 0.3, order: 1
       }
     ]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
+    responsive: true, maintainAspectRatio: false,
     interaction: { mode: 'index', intersect: false },
     plugins: {
-      legend: { position: 'top', labels: { padding: 18, boxWidth: 10, boxHeight: 10, usePointStyle: true }},
+      legend: { position: 'top', labels: { padding: 16, boxWidth: 10, boxHeight: 10, usePointStyle: true, color: '#444' }},
       tooltip: {
-        backgroundColor: '#1a2e1a',
-        borderColor: 'rgba(255,255,255,0.1)',
-        borderWidth: 1,
-        padding: 12,
-        callbacks: { label: ctx => `  ${ctx.dataset.label}: ${c(ctx.parsed.y)}` }
+        backgroundColor: '#fff', borderColor: 'rgba(30,59,30,0.2)', borderWidth: 1,
+        titleColor: '#1a1a1a', bodyColor: '#444', padding: 12,
+        callbacks: { label: ctx => `  ${ctx.dataset.label}: ${ctx.raw < 0 ? '−' : ''}${fmt(ctx.parsed.y)}` }
       }
     },
     scales: {
-      y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { callback: c } },
-      x: { grid: { display: false } }
+      y: { grid: { color: 'rgba(30,59,30,0.07)' }, ticks: { callback: v => v < 0 ? '−'+fmt(v) : fmt(v), color: '#888' } },
+      x: { grid: { display: false }, ticks: { color: '#888' } }
     }
   }
 });
 
-/* YTD Category Donut */
+/* YTD Category */
 new Chart(document.getElementById('ytdCatChart'), {
   type: 'doughnut',
   data: {
-    labels: ['Collab', 'Dinner Party', 'Consulting', 'Freelance', 'Ingredient/Product'],
+    labels: ['Collab', 'Dinner Party', 'Consulting', 'Freelance', 'Ingredients'],
     datasets: [{
       data: [13166, 10785, 8986, 6650, 1935],
-      backgroundColor: [PURPLE, BLUE, AMBER, GREEN, CORAL],
-      borderColor: '#1E3B1E',
-      borderWidth: 3,
-      hoverOffset: 8
+      backgroundColor: [G_PURPLE, G_BLUE, G_AMBER, G_GREEN2, G_CORAL],
+      borderColor: '#fff', borderWidth: 3, hoverOffset: 8
     }]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '66%',
+    responsive: true, maintainAspectRatio: false, cutout: '66%',
     plugins: {
-      legend: { position: 'right', labels: { padding: 14, boxWidth: 10, boxHeight: 10, usePointStyle: true }},
+      legend: { position: 'right', labels: { padding: 12, boxWidth: 10, boxHeight: 10, usePointStyle: true, color: '#444' }},
       tooltip: {
-        backgroundColor: '#1a2e1a',
-        borderColor: 'rgba(255,255,255,0.1)',
-        borderWidth: 1,
-        padding: 12,
-        callbacks: { label: ctx => `  ${ctx.label}: ${c(ctx.raw)}` }
+        backgroundColor: '#fff', borderColor: 'rgba(30,59,30,0.2)', borderWidth: 1,
+        titleColor: '#1a1a1a', bodyColor: '#444', padding: 10,
+        callbacks: { label: ctx => `  ${ctx.label}: ${fmt(ctx.raw)}` }
       }
     }
   }
 });
 
-/* April Category Donut */
+/* April Category */
 new Chart(document.getElementById('aprCatChart'), {
   type: 'doughnut',
   data: {
     labels: ['Collab', 'Dinner Party', 'Consulting', 'Freelance'],
     datasets: [{
       data: [9097, 3455, 3200, 625],
-      backgroundColor: [PURPLE, BLUE, AMBER, GREEN],
-      borderColor: '#1E3B1E',
-      borderWidth: 3,
-      hoverOffset: 8
+      backgroundColor: [G_PURPLE, G_BLUE, G_AMBER, G_GREEN2],
+      borderColor: '#fff', borderWidth: 3, hoverOffset: 8
     }]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '66%',
+    responsive: true, maintainAspectRatio: false, cutout: '66%',
     plugins: {
-      legend: { position: 'right', labels: { padding: 12, boxWidth: 10, boxHeight: 10, usePointStyle: true }},
+      legend: { position: 'right', labels: { padding: 10, boxWidth: 10, boxHeight: 10, usePointStyle: true, color: '#444' }},
       tooltip: {
-        backgroundColor: '#1a2e1a',
-        borderColor: 'rgba(255,255,255,0.1)',
-        borderWidth: 1,
-        padding: 10,
-        callbacks: { label: ctx => `  ${ctx.label}: ${c(ctx.raw)}` }
+        backgroundColor: '#fff', borderColor: 'rgba(30,59,30,0.2)', borderWidth: 1,
+        titleColor: '#1a1a1a', bodyColor: '#444', padding: 10,
+        callbacks: { label: ctx => `  ${ctx.label}: ${fmt(ctx.raw)}` }
       }
     }
   }
 });
 
-/* April Expenses Bar */
+/* April Expenses */
 new Chart(document.getElementById('aprExpChart'), {
   type: 'bar',
   data: {
-    labels: ['Equipment', 'Ingredients', 'Meetings', 'Wellfare', 'Utility', 'Transport', 'Other'],
+    labels: ['Equipment', 'Ingredients', 'Meetings', 'Wellfare', 'Utility', 'Transport'],
     datasets: [{
-      data: [3053, 1890, 609, 295, 240, 84, 176],
-      backgroundColor: 'rgba(207,73,40,0.45)',
-      borderColor: CORAL,
-      borderWidth: 1,
-      borderRadius: 4
+      data: [3053, 1890, 609, 295, 240, 84],
+      backgroundColor: 'rgba(207,73,40,0.35)',
+      borderColor: G_CORAL, borderWidth: 1.5, borderRadius: 4
     }]
   },
   options: {
-    indexAxis: 'y',
-    responsive: true,
-    maintainAspectRatio: false,
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#1a2e1a',
-        borderColor: 'rgba(255,255,255,0.1)',
-        borderWidth: 1,
-        padding: 10,
-        callbacks: { label: ctx => `  ${c(ctx.raw)}` }
+        backgroundColor: '#fff', borderColor: 'rgba(30,59,30,0.2)', borderWidth: 1,
+        titleColor: '#1a1a1a', bodyColor: '#444', padding: 10,
+        callbacks: { label: ctx => `  ${fmt(ctx.raw)}` }
       }
     },
     scales: {
-      x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { callback: c } },
-      y: { grid: { display: false } }
+      x: { grid: { color: 'rgba(30,59,30,0.07)' }, ticks: { callback: fmt, color: '#888' } },
+      y: { grid: { display: false }, ticks: { color: '#555' } }
     }
   }
 });
 
-/* ─────────────────── PERIOD SWITCHING ─────────────────── */
-function showPeriod(period) {
-  ['weekly','monthly','alltime'].forEach(p => {
-    document.getElementById('panel-' + p).classList.toggle('active', p === period);
-    document.getElementById('tab-' + p).classList.toggle('active', p === period);
+/* ── COUNT-UP ── */
+function countUp(el, target, duration = 800) {
+  const start = performance.now();
+  (function tick(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = (target < 0 ? '−$' : '$') + Math.round(Math.abs(ease * target)).toLocaleString('en-SG');
+    if (t < 1) requestAnimationFrame(tick);
+  })(start);
+}
+
+/* ── INTERSECTION OBSERVER ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    e.target.querySelectorAll('[data-countup]').forEach(v => countUp(v, +v.dataset.countup));
+    obs.unobserve(e.target);
   });
-  // re-observe for animations in newly shown panel
-  document.querySelectorAll('.animate-in:not(.visible)').forEach(el => obs.observe(el));
-  setTimeout(animateProgressBars, 100);
-  // trigger count-ups in active panel
-  document.querySelectorAll('#panel-' + period + ' [data-countup]').forEach(el => {
-    countUp(el, +el.dataset.countup);
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.animate-in').forEach(el => obs.observe(el));
+
+/* ── PROGRESS BARS ── */
+function animateProgress() {
+  document.querySelectorAll('.progress-fill[data-pct]').forEach(el => {
+    el.style.width = Math.min(+el.dataset.pct, 100) + '%';
   });
 }
 
-/* Init */
-setTimeout(animateProgressBars, 400);
+/* ── TAB SWITCH ── */
+function switchTab(id) {
+  ['weekly','monthly','alltime'].forEach(p => {
+    document.getElementById('panel-' + p).classList.toggle('active', p === id);
+    document.getElementById('tab-' + p).classList.toggle('active', p === id);
+  });
+  document.querySelectorAll('.animate-in:not(.visible)').forEach(el => obs.observe(el));
+  setTimeout(animateProgress, 120);
+  document.querySelectorAll('#panel-' + id + ' [data-countup]').forEach(v => countUp(v, +v.dataset.countup));
+}
+
+/* init */
+setTimeout(animateProgress, 350);
 </script>
 </body>
 </html>
