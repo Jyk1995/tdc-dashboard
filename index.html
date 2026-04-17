@@ -214,6 +214,12 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
 .drill-hint::after{content:' ▾';font-size:9px}
 .kpi-card.clickable.active-drill .drill-hint::after{content:' ▴'}
 
+/* ═══ INVOICE DRAWER ═══ */
+.inv-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:.5px solid var(--parchment-dk)}
+.inv-row:last-child{border-bottom:none}
+.inv-name{font-size:12.5px;font-weight:600;color:var(--ink);flex:1;padding-right:12px}
+.inv-amt{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:var(--gold);white-space:nowrap}
+
 /* ═══ CUSTOM RANGE PANEL ═══ */
 .cr-summary{background:var(--card);border:.5px solid var(--border-s);border-top:3px solid var(--gold);border-radius:3px;padding:20px;margin-bottom:12px}
 .cr-header{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:4px}
@@ -279,7 +285,8 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
   <div class="kpi-grid">
     <div class="kpi-card amber anim d1"><div class="kpi-label">Invoiced this week</div><div class="kpi-value amber" data-cu="5972">$5,972</div><div class="kpi-sub">Apr 14–16, 2026</div><span class="badge neutral">4 invoices</span></div>
     <div class="kpi-card pos anim d2"><div class="kpi-label">Collected</div><div class="kpi-value pos" data-cu="1500">$1,500</div><div class="kpi-sub">a secret wine bar 2/2</div><span class="badge up">Paid</span></div>
-    <div class="kpi-card amber anim d3"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="4472">$4,472</div><div class="kpi-sub">3 invoices sent</div><span class="badge warn">Pending</span></div>
+    <div class="kpi-card amber clickable anim d3" onclick="toggleInvDrawer('weekly')"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="4472">$4,472</div><div class="kpi-sub">3 invoices sent</div><span class="badge warn">Pending</span><div class="drill-hint">Tap to see invoices</div></div>
+    <div id="weekly-inv-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--gold)"><div class="card-title">Awaiting payment — this week</div><div id="weekly-inv-list"></div></div></div>
     <div class="kpi-card green anim d4"><div class="kpi-label">April so far</div><div class="kpi-value pos" data-cu="13304">+$13,304</div><div class="kpi-sub">Net P&L month-to-date</div><span class="badge up">Best month</span></div>
   </div>
   <div class="section-label">This week's invoices</div>
@@ -307,8 +314,9 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
     <div class="kpi-card coral clickable anim d2" onclick="toggleExpDrawer('monthly')"><div class="kpi-label">Expenses — April</div><div class="kpi-value coral" data-cu="6174">$6,174</div><div class="kpi-sub">Per Year Overview</div><span class="badge up">−54% vs Mar</span><div class="drill-hint">Tap to see by category</div></div>
     <div id="monthly-exp-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--coral)"><div class="card-title">April expenses by category</div><div id="monthly-exp-cats"></div></div></div>
     <div class="kpi-card pos anim d3"><div class="kpi-label">Net P&L — April</div><div class="kpi-value pos">+$13,304</div><div class="kpi-sub">Best month ever</div><span class="badge up">Record</span></div>
-    <div class="kpi-card amber anim d4"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="8822">$8,822</div><div class="kpi-sub">6 invoices outstanding</div><span class="badge warn">Chase these</span></div>
+    <div class="kpi-card amber clickable anim d4" onclick="toggleInvDrawer('monthly')"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="8822">$8,822</div><div class="kpi-sub">6 invoices outstanding</div><span class="badge warn">Chase these</span><div class="drill-hint">Tap to see invoices</div></div>
   </div>
+  <div id="monthly-inv-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--gold)"><div class="card-title">Awaiting payment — April</div><div id="monthly-inv-list"></div></div></div>
   <div class="card green-frame anim" style="margin-bottom:10px">
     <div class="card-title">April vs $10K monthly target <span style="color:var(--ink-muted);font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">Day 17 of 30</span></div>
     <div class="pgp">
@@ -683,6 +691,44 @@ function renderExpCats(containerId,data){
 function expRow(name,amt,total,color){
   const pct=Math.round(amt/total*100);
   return `<div class="exp-cat-row"><div class="exp-cat-swatch" style="background:${color||'#999'}"></div><div class="exp-cat-name">${name}</div><div class="exp-cat-amt">$${amt.toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2})}</div><div class="exp-cat-pct">${pct}%</div></div>`;
+}
+
+/* ═══ INVOICE DRAWERS ═══ */
+const INV_WEEKLY=[
+  {c:'Casa Cicheti',amt:3597.48},
+  {c:'Tan Private Dining (50% Deposit)',amt:800},
+  {c:'GRAPEVIBES — Bread Delivery',amt:75},
+];
+const INV_MONTHLY=[
+  {c:'Andsfood',amt:3200},
+  {c:'Casa Cicheti',amt:3597.48},
+  {c:'Tan Private Dining (50% Deposit)',amt:800},
+  {c:'Lee Hish LEK (50% Deposit)',amt:600},
+  {c:'Oatside',amt:400},
+  {c:'GRAPEVIBES — Bread ×3',amt:225},
+];
+
+function renderInvList(containerId,items){
+  const el=document.getElementById(containerId);
+  const total=items.reduce((s,i)=>s+i.amt,0);
+  el.innerHTML=items.map(i=>`
+    <div class="inv-row">
+      <div class="inv-name">${i.c}</div>
+      <div class="inv-amt">$${i.amt.toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+    </div>`).join('')+
+    `<div class="tf"><span class="tf-lbl">Total</span><span class="tf-val">$${total.toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2})}</span></div>`;
+}
+
+function toggleInvDrawer(panel){
+  const drawer=document.getElementById(panel+'-inv-drawer');
+  const card=event.currentTarget;
+  const isOpen=drawer.classList.contains('open');
+  drawer.classList.toggle('open',!isOpen);
+  card.classList.toggle('active-drill',!isOpen);
+  if(!isOpen){
+    if(panel==='weekly') renderInvList('weekly-inv-list',INV_WEEKLY);
+    if(panel==='monthly') renderInvList('monthly-inv-list',INV_MONTHLY);
+  }
 }
 
 // Track current custom range for the drawer
