@@ -518,12 +518,14 @@ function renderCal(){
 }
 
 function pickDay(ds){
-  if(!rangeStart||rangeEnd){rangeStart=ds;rangeEnd=null}
-  else if(ds<rangeStart){rangeEnd=rangeStart;rangeStart=ds}
-  else if(ds===rangeStart){rangeStart=null}
-  else{rangeEnd=ds}
+  if(!rangeStart||rangeEnd){rangeStart=ds;rangeEnd=null;}
+  else if(ds<rangeStart){rangeEnd=rangeStart;rangeStart=ds;}
+  else if(ds===rangeStart){rangeStart=null;}
+  else{rangeEnd=ds;}
   renderCal();
   updateRangeDisplay();
+  // Auto-apply as soon as both dates are picked — no button needed
+  if(rangeStart&&rangeEnd) setTimeout(applyCustomRange,120);
 }
 
 function updateRangeDisplay(){
