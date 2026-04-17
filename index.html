@@ -401,7 +401,8 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
   </div>
   <div class="kpi-grid">
     <div class="kpi-card pos anim d1"><div class="kpi-label">Revenue (range)</div><div class="kpi-value pos" id="cr-rev">—</div><div class="kpi-sub">Paid + invoiced</div></div>
-    <div class="kpi-card coral anim d2"><div class="kpi-label">Expenses (est.)</div><div class="kpi-value coral" id="cr-exp">—</div><div class="kpi-sub">Prorated monthly costs</div></div>
+    <div class="kpi-card coral clickable anim d2" onclick="toggleExpDrawer('custom')"><div class="kpi-label">Expenses (est.)</div><div class="kpi-value coral" id="cr-exp">—</div><div class="kpi-sub">Prorated monthly costs</div><div class="drill-hint">Tap to see by category</div></div>
+    <div id="custom-exp-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--coral)"><div class="card-title">Expenses by category — custom range</div><div id="custom-exp-cats"></div></div></div>
     <div class="kpi-card pos anim d3"><div class="kpi-label">Net P&L</div><div class="kpi-value" id="cr-net">—</div><div class="kpi-sub" id="cr-net-sub"></div></div>
     <div class="kpi-card amber anim d4"><div class="kpi-label">Transactions</div><div class="kpi-value amber" id="cr-count">—</div><div class="kpi-sub">Revenue items in range</div></div>
   </div>
@@ -588,6 +589,12 @@ function buildLabel(){
 function toISO(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 
 function computeCustomRange(start,end){
+  customRangeStart=start;customRangeEnd=end;
+  // Reset expense drawer if already open
+  const drawer=document.getElementById('custom-exp-drawer');
+  if(drawer.classList.contains('open')){
+    renderExpCats('custom-exp-cats',computeExpCatForRange(start,end));
+  }
   const txns=TXNS.filter(t=>t.d>=start&&t.d<=end&&t.s!=='Blocked');
   const rev=txns.reduce((s,t)=>s+t.amt,0);
   // Prorate expenses per month
@@ -632,26 +639,54 @@ function computeCustomRange(start,end){
   document.getElementById('crTableTotal').textContent=fmt(rev);
 }
 
-/* ═══ EXPENSE CATEGORIES DATA ═══ */
-const EXP_CAT_COLORS=['#CF4928','#8A6A1A','#5C3878','#2A6080','#4A6741','#1E3B1E'];
-const EXP_CAT_APR={Equipment:3053,Ingredients:1890,Meetings:609,Welfare:295,Utility:240,Transport:84};
-// YTD breakdown: April actuals + estimated proportions for Jan-Mar (sync from Sheets on refresh)
-const EXP_CAT_YTD={Equipment:11800,Ingredients:9200,Meetings:6100,Welfare:2800,Utility:4100,Transport:1200,'Other (pre-Apr)':6919};
+/* ═══ EXPENSE CATEGORIES — SOURCE: GOOGLE SHEETS ═══ */
+const EXP_CAT_COLORS=['#1E3B1E','#CF4928','#8A6A1A','#5C3878','#2A6080','#4A6741','#A82020','#2A7060','#666'];
+const EXP_CAT_BY_MONTH={
+  '2026-01':{Salary:4431,Meetings:1383.18,Ingredients:1344.46,Equipment:1293.60,Marketing:539.99,Transport:139.11,'Staff Welfare':102.21,Utility:25,Travel:20.08},
+  '2026-02':{Salary:4431,Meetings:3796.80,Ingredients:2103.72,Equipment:1443.27,Utility:603.74,Marketing:281.23,Transport:271.59,'Staff Welfare':182.28,Travel:19.50,Admin:15.80},
+  '2026-03':{Salary:4431,Ingredients:3554.22,Equipment:2014.22,Meetings:1811.87,'Staff Welfare':636.61,Marketing:450.21,Utility:292.67,Transport:163.57,'Part-time Staff':150,Admin:13.95},
+  '2026-04':{Equipment:3053.30,Ingredients:1889.88,Meetings:609.15,'Staff Welfare':295.43,Utility:240.10,Transport:83.70,Admin:2.00},
+};
 
-function renderExpCats(containerId,data,total){
+function sumCats(cats){return Object.values(cats).reduce((s,v)=>s+v,0);}
+
+function computeExpCatForRange(start,end){
+  const merged={};
+  const s=new Date(start),e=new Date(end);
+  Object.keys(EXP_CAT_BY_MONTH).forEach(mk=>{
+    const[my,mm]=mk.split('-').map(Number);
+    const mStart=new Date(my,mm-1,1),mEnd=new Date(my,mm,0);
+    const rStart=s>mStart?s:mStart,rEnd=e<mEnd?e:mEnd;
+    if(rStart<=rEnd){
+      const days=(rEnd-rStart)/86400000+1;
+      const ratio=days/DAYS_IN_MONTH[mk];
+      Object.entries(EXP_CAT_BY_MONTH[mk]).forEach(([cat,amt])=>{
+        merged[cat]=(merged[cat]||0)+amt*ratio;
+      });
+    }
+  });
+  return merged;
+}
+
+function renderExpCats(containerId,data){
   const el=document.getElementById(containerId);
-  const entries=Object.entries(data).sort((a,b)=>b[1]-a[1]);
+  const total=sumCats(data);
+  const entries=Object.entries(data).filter(([,v])=>v>0.5).sort((a,b)=>b[1]-a[1]);
+  const half=Math.ceil(entries.length/2);
   el.innerHTML=`<div class="exp-cat-grid">
-    <div>${entries.slice(0,Math.ceil(entries.length/2)).map((([k,v],i)=>expRow(k,v,total,EXP_CAT_COLORS[i]))).join('')}</div>
-    <div>${entries.slice(Math.ceil(entries.length/2)).map((([k,v],i)=>expRow(k,v,total,EXP_CAT_COLORS[i+Math.ceil(entries.length/2)]))).join('')}</div>
+    <div>${entries.slice(0,half).map(([k,v],i)=>expRow(k,v,total,EXP_CAT_COLORS[i])).join('')}</div>
+    <div>${entries.slice(half).map(([k,v],i)=>expRow(k,v,total,EXP_CAT_COLORS[i+half])).join('')}</div>
   </div>
-  <div class="tf" style="margin-top:8px"><span class="tf-lbl">Total</span><span class="tf-val" style="color:var(--coral)">$${Math.round(total).toLocaleString('en-SG')}</span></div>`;
+  <div class="tf" style="margin-top:8px"><span class="tf-lbl">Total</span><span class="tf-val" style="color:var(--coral)">$${total.toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2})}</span></div>`;
 }
 
 function expRow(name,amt,total,color){
   const pct=Math.round(amt/total*100);
-  return `<div class="exp-cat-row"><div class="exp-cat-swatch" style="background:${color}"></div><div class="exp-cat-name">${name}</div><div class="exp-cat-amt">$${Math.round(amt).toLocaleString('en-SG')}</div><div class="exp-cat-pct">${pct}%</div></div>`;
+  return `<div class="exp-cat-row"><div class="exp-cat-swatch" style="background:${color||'#999'}"></div><div class="exp-cat-name">${name}</div><div class="exp-cat-amt">$${amt.toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2})}</div><div class="exp-cat-pct">${pct}%</div></div>`;
 }
+
+// Track current custom range for the drawer
+let customRangeStart=null,customRangeEnd=null;
 
 function toggleExpDrawer(panel){
   const drawer=document.getElementById(panel+'-exp-drawer');
@@ -660,8 +695,16 @@ function toggleExpDrawer(panel){
   drawer.classList.toggle('open',!isOpen);
   card.classList.toggle('active-drill',!isOpen);
   if(!isOpen){
-    if(panel==='monthly') renderExpCats('monthly-exp-cats',EXP_CAT_APR,6174);
-    if(panel==='alltime') renderExpCats('alltime-exp-cats',EXP_CAT_YTD,42119);
+    if(panel==='monthly') renderExpCats('monthly-exp-cats',EXP_CAT_BY_MONTH['2026-04']);
+    if(panel==='alltime'){
+      // Merge all months YTD
+      const ytd={};
+      Object.values(EXP_CAT_BY_MONTH).forEach(m=>Object.entries(m).forEach(([k,v])=>{ytd[k]=(ytd[k]||0)+v;}));
+      renderExpCats('alltime-exp-cats',ytd);
+    }
+    if(panel==='custom'&&customRangeStart&&customRangeEnd){
+      renderExpCats('custom-exp-cats',computeExpCatForRange(customRangeStart,customRangeEnd));
+    }
   }
 }
 
