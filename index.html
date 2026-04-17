@@ -6,46 +6,52 @@
 <title>The Dinner Club SG — P&L</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --cream:        #F5F0EB;
-  --cream-dark:   #EDE8E2;
-  --white:        #FFFFFF;
+  --parchment:    #F0E8D8;
+  --parchment-dk: #E4D9C6;
+  --parchment-lt: #F7F2E9;
+  --card-bg:      #FAF6EF;
   --green:        #1E3B1E;
   --green-mid:    #2A5024;
   --green-light:  #4A6741;
-  --green-pale:   #EBF0EB;
+  --green-pale:   #E8EDDF;
   --coral:        #CF4928;
-  --coral-light:  #E06040;
-  --coral-pale:   #FAECEA;
-  --ink:          #1A1A1A;
-  --ink-mid:      #444444;
-  --ink-muted:    #888888;
-  --amber:        #B5730A;
-  --amber-pale:   #FDF3E3;
-  --positive:     #1A6B2A;
-  --positive-pale:#E8F5EB;
-  --negative:     #C03030;
-  --negative-pale:#FAEAEA;
-  --purple:       #7C4DA0;
-  --purple-pale:  #F3EEF8;
-  --border:       rgba(30,59,30,0.12);
-  --border-strong:rgba(30,59,30,0.25);
+  --coral-light:  #D9553A;
+  --coral-pale:   #F8EAE5;
+  --ink:          #1C1611;
+  --ink-mid:      #3D3328;
+  --ink-muted:    #8A7E6F;
+  --gold:         #8A6A1A;
+  --gold-pale:    #F5EDD0;
+  --positive:     #1A5C28;
+  --positive-pale:#E4F0E6;
+  --negative:     #A82020;
+  --negative-pale:#F5E4E4;
+  --purple:       #5C3878;
+  --purple-pale:  #EDE5F5;
+  --border:       rgba(28,22,17,0.1);
+  --border-strong:rgba(28,22,17,0.22);
+  --rule:         rgba(28,22,17,0.15);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--cream);
+  background: var(--parchment);
   color: var(--ink);
   font-family: 'Outfit', sans-serif;
   font-size: 14px;
   line-height: 1.5;
   min-height: 100vh;
+  /* subtle aged paper texture */
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(139,90,26,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(30,59,30,0.03) 0%, transparent 50%);
 }
 
 .page {
@@ -60,15 +66,26 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 28px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--green);
+  padding-bottom: 18px;
+  border-bottom: 0.5px solid var(--rule);
+  position: relative;
   opacity: 0;
   animation: slideDown 0.5s cubic-bezier(0.23,1,0.32,1) 0.05s forwards;
 }
 
+/* Double rule header treatment */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  height: 0.5px;
+  background: var(--rule);
+}
+
 .header h1 {
   font-family: 'Fraunces', serif;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 900;
   letter-spacing: -0.03em;
   color: var(--green);
@@ -76,39 +93,42 @@ body {
 }
 
 .header h1 em {
-  font-style: normal;
+  font-style: italic;
+  font-weight: 700;
   color: var(--coral);
 }
 
 .header-sub {
-  font-size: 12px;
+  font-size: 10.5px;
   color: var(--ink-muted);
-  margin-top: 5px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  margin-top: 6px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  font-family: 'Outfit', sans-serif;
 }
 
 .as-of {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: var(--green);
-  background: var(--green-pale);
-  border: 1px solid var(--border-strong);
-  padding: 5px 12px;
-  border-radius: 20px;
+  font-size: 10.5px;
+  color: var(--ink-mid);
+  background: transparent;
+  border: 0.5px solid var(--border-strong);
+  padding: 5px 14px;
+  border-radius: 2px;
   font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 /* ─── PERIOD TABS ─── */
 .period-tabs {
   display: flex;
-  gap: 3px;
+  gap: 0;
   margin-bottom: 24px;
-  background: var(--white);
-  border: 1.5px solid var(--border-strong);
-  padding: 4px;
-  border-radius: 10px;
+  background: var(--card-bg);
+  border: 0.5px solid var(--border-strong);
+  padding: 3px;
+  border-radius: 3px;
   width: fit-content;
   opacity: 0;
   animation: slideDown 0.5s cubic-bezier(0.23,1,0.32,1) 0.15s forwards;
@@ -119,17 +139,19 @@ body {
   border: none;
   color: var(--ink-muted);
   font-family: 'Outfit', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 22px;
-  border-radius: 7px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 2px;
   cursor: pointer;
   transition: all 0.18s cubic-bezier(0.23,1,0.32,1);
 }
 
 .period-tabs button.active {
   background: var(--green);
-  color: var(--cream);
+  color: var(--parchment);
 }
 
 .period-tabs button:hover:not(.active) {
@@ -148,22 +170,22 @@ body {
 @media (max-width: 500px) { .kpi-grid { grid-template-columns: 1fr; } }
 
 .kpi-card {
-  background: var(--white);
-  border: 1.5px solid var(--border);
+  background: var(--card-bg);
+  border: 0.5px solid var(--border-strong);
   border-top: 3px solid var(--top-color, var(--border-strong));
-  border-radius: 12px;
+  border-radius: 3px;
   padding: 18px 18px 16px;
   transition: transform 0.18s cubic-bezier(0.23,1,0.32,1), box-shadow 0.18s;
 }
 
 .kpi-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(30,59,30,0.1);
+  box-shadow: 0 4px 16px rgba(28,22,17,0.1);
 }
 
 .kpi-card.green   { --top-color: var(--green); }
 .kpi-card.coral   { --top-color: var(--coral); }
-.kpi-card.amber   { --top-color: var(--amber); }
+.kpi-card.amber   { --top-color: var(--gold); }
 .kpi-card.positive{ --top-color: var(--positive); }
 .kpi-card.negative{ --top-color: var(--negative); }
 .kpi-card.purple  { --top-color: var(--purple); }
@@ -191,7 +213,7 @@ body {
 .kpi-value.coral    { color: var(--coral); }
 .kpi-value.positive { color: var(--positive); }
 .kpi-value.negative { color: var(--negative); }
-.kpi-value.amber    { color: var(--amber); }
+.kpi-value.amber    { color: var(--gold); }
 
 .kpi-sub {
   font-size: 12px;
@@ -211,7 +233,7 @@ body {
 
 .badge.up       { background: var(--positive-pale); color: var(--positive); }
 .badge.down     { background: var(--negative-pale); color: var(--negative); }
-.badge.warn     { background: var(--amber-pale); color: var(--amber); }
+.badge.warn     { background: var(--gold-pale); color: var(--gold); }
 .badge.coral    { background: var(--coral-pale); color: var(--coral); }
 .badge.neutral  { background: var(--green-pale); color: var(--green-light); }
 .badge.purple   { background: var(--purple-pale); color: var(--purple); }
@@ -235,15 +257,15 @@ body {
 
 /* ─── CARD ─── */
 .card {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
+  background: var(--card-bg);
+  border: 0.5px solid var(--border-strong);
+  border-radius: 3px;
   padding: 20px;
 }
 
 .card.green-frame {
   border-color: var(--border-strong);
-  border-top: 3px solid var(--green);
+  border-top: 2.5px solid var(--green);
 }
 
 .card-title {
@@ -263,30 +285,29 @@ body {
 
 /* ─── SECTION LABEL ─── */
 .section-label {
-  font-size: 10.5px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--green);
+  color: var(--ink-muted);
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 22px 0 10px;
+  gap: 12px;
+  margin: 24px 0 10px;
+  font-family: 'Outfit', sans-serif;
 }
 
-.section-label::before {
-  content: '';
-  width: 4px;
-  height: 14px;
-  background: var(--coral);
-  border-radius: 2px;
-}
-
+.section-label::before,
 .section-label::after {
   content: '';
   flex: 1;
-  height: 1px;
-  background: var(--border-strong);
+  height: 0.5px;
+  background: var(--rule);
+}
+
+/* decorative ornament in middle of some labels */
+.section-label span {
+  white-space: nowrap;
 }
 
 /* ─── DATA TABLE ─── */
@@ -298,26 +319,26 @@ body {
 }
 
 .data-table th {
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--ink-muted);
   text-align: left;
   padding: 0 10px 11px;
-  border-bottom: 1.5px solid var(--border-strong);
+  border-bottom: 0.5px solid var(--border-strong);
   white-space: nowrap;
 }
 
 .data-table td {
   padding: 11px 10px;
   font-size: 13px;
-  border-bottom: 1px solid var(--cream-dark);
+  border-bottom: 0.5px solid var(--parchment-dk);
   vertical-align: middle;
 }
 
 .data-table tr:last-child td { border-bottom: none; }
-.data-table tr:hover td { background: var(--cream); }
+.data-table tr:hover td { background: rgba(28,22,17,0.025); }
 
 .client-name { font-weight: 600; color: var(--ink); }
 .date-cell   { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-muted); }
@@ -327,7 +348,7 @@ body {
   font-weight: 700;
   font-size: 13.5px;
   text-align: right;
-  color: var(--amber);
+  color: var(--gold);
   white-space: nowrap;
 }
 
@@ -336,27 +357,31 @@ body {
 .amount-col.purple   { color: var(--purple); }
 
 .cat-pill {
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   padding: 2px 8px;
-  border-radius: 20px;
+  border-radius: 2px;
   background: var(--green-pale);
-  color: var(--green-light);
-  border: 1px solid var(--border);
+  color: var(--green);
+  border: 0.5px solid rgba(30,59,30,0.2);
   white-space: nowrap;
+  text-transform: uppercase;
 }
 
 .status-pill {
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   padding: 2px 8px;
-  border-radius: 20px;
+  border-radius: 2px;
   white-space: nowrap;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Outfit', sans-serif;
 }
 
 .s-paid     { background: var(--positive-pale); color: var(--positive); }
-.s-awaiting { background: var(--amber-pale); color: var(--amber); }
+.s-awaiting { background: var(--gold-pale); color: var(--gold); }
 .s-pipeline { background: var(--purple-pale); color: var(--purple); }
 
 /* table footer */
@@ -366,13 +391,13 @@ body {
   align-items: center;
   padding: 13px 10px 0;
   margin-top: 10px;
-  border-top: 1.5px solid var(--border-strong);
+  border-top: 0.5px solid var(--border-strong);
 }
 
 .table-footer .tf-label {
-  font-size: 11px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
@@ -381,7 +406,7 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: 18px;
   font-weight: 700;
-  color: var(--amber);
+  color: var(--gold);
 }
 
 .table-footer .tf-value.purple { color: var(--purple); }
@@ -393,14 +418,14 @@ body {
 }
 
 .monthly-table th {
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--ink-muted);
   text-align: right;
   padding: 0 10px 11px;
-  border-bottom: 1.5px solid var(--border-strong);
+  border-bottom: 0.5px solid var(--border-strong);
 }
 
 .monthly-table th:first-child { text-align: left; }
@@ -410,7 +435,7 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
   text-align: right;
-  border-bottom: 1px solid var(--cream-dark);
+  border-bottom: 0.5px solid var(--parchment-dk);
   font-variant-numeric: tabular-nums;
 }
 
@@ -423,7 +448,7 @@ body {
 }
 
 .monthly-table tr.ytd-row td {
-  border-top: 2px solid var(--green);
+  border-top: 0.5px solid var(--border-strong);
   border-bottom: none;
   font-weight: 700;
   padding-top: 12px;
@@ -440,19 +465,19 @@ body {
 @media (max-width: 900px) { .insights-grid { grid-template-columns: 1fr; } }
 
 .insight-card {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-left: 4px solid var(--left-color, var(--border-strong));
-  border-radius: 12px;
+  background: var(--card-bg);
+  border: 0.5px solid var(--border-strong);
+  border-left: 3px solid var(--left-color, var(--border-strong));
+  border-radius: 3px;
   padding: 16px 18px;
   transition: transform 0.18s cubic-bezier(0.23,1,0.32,1);
 }
 
 .insight-card:hover { transform: translateY(-2px); }
-.insight-card.win      { --left-color: var(--positive); background: var(--positive-pale); border-color: rgba(26,107,42,0.15); }
-.insight-card.focus    { --left-color: var(--coral); background: var(--coral-pale); border-color: rgba(207,73,40,0.15); }
-.insight-card.pipeline { --left-color: var(--purple); background: var(--purple-pale); border-color: rgba(124,77,160,0.15); }
-.insight-card.amber    { --left-color: var(--amber); background: var(--amber-pale); border-color: rgba(181,115,10,0.15); }
+.insight-card.win      { --left-color: var(--positive); background: var(--positive-pale); border-color: rgba(26,92,40,0.12); }
+.insight-card.focus    { --left-color: var(--coral); background: var(--coral-pale); border-color: rgba(207,73,40,0.12); }
+.insight-card.pipeline { --left-color: var(--purple); background: var(--purple-pale); border-color: rgba(92,56,120,0.12); }
+.insight-card.amber    { --left-color: var(--gold); background: var(--gold-pale); border-color: rgba(138,106,26,0.15); }
 
 .insight-tag {
   font-size: 9.5px;
@@ -465,7 +490,7 @@ body {
 .insight-card.win .insight-tag      { color: var(--positive); }
 .insight-card.focus .insight-tag    { color: var(--coral); }
 .insight-card.pipeline .insight-tag { color: var(--purple); }
-.insight-card.amber .insight-tag    { color: var(--amber); }
+.insight-card.amber .insight-tag    { color: var(--gold); }
 
 .insight-text {
   font-size: 13px;
@@ -486,7 +511,7 @@ body {
 .insight-card.win .insight-num      { color: var(--positive); }
 .insight-card.focus .insight-num    { color: var(--coral); }
 .insight-card.pipeline .insight-num { color: var(--purple); }
-.insight-card.amber .insight-num    { color: var(--amber); }
+.insight-card.amber .insight-num    { color: var(--gold); }
 
 /* ─── PROGRESS ─── */
 .progress-group { display: flex; gap: 28px; flex-wrap: wrap; }
@@ -532,70 +557,89 @@ body {
   width: 11px; height: 11px;
   border-radius: 50%;
   background: inherit;
-  border: 2px solid var(--white);
+  border: 2px solid var(--card-bg);
 }
 
 .progress-fill.green    { background: var(--green); }
 .progress-fill.positive { background: var(--positive); }
 .progress-fill.coral    { background: var(--coral); }
-.progress-fill.amber    { background: var(--amber); }
+.progress-fill.amber    { background: var(--gold); }
 .progress-fill.purple   { background: var(--purple); }
 
 /* ─── MOTIVATIONAL QUOTE ─── */
 .quote-card {
   background: var(--green);
-  border-radius: 14px;
-  padding: 28px 32px;
+  border-radius: 3px;
+  padding: 30px 36px;
   margin-bottom: 12px;
   position: relative;
   overflow: hidden;
+  /* faint inner rule to give it texture */
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05), inset 4px 4px 0 0 rgba(255,255,255,0.02);
 }
 
+/* Large ornamental opening mark */
 .quote-card::before {
   content: '\201C';
   position: absolute;
-  top: -10px;
-  left: 24px;
-  font-family: 'Fraunces', serif;
-  font-size: 120px;
-  font-weight: 900;
-  color: rgba(255,255,255,0.08);
+  top: -20px;
+  left: 28px;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 160px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.06);
   line-height: 1;
   pointer-events: none;
+  font-style: italic;
+}
+
+/* Thin rule above context line */
+.quote-card::after {
+  content: '';
+  position: absolute;
+  bottom: 62px;
+  left: 36px; right: 36px;
+  height: 0.5px;
+  background: rgba(255,255,255,0.12);
 }
 
 .quote-text {
-  font-family: 'Fraunces', serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 19px;
+  font-weight: 400;
   font-style: italic;
-  color: var(--cream);
-  line-height: 1.45;
-  letter-spacing: -0.01em;
+  color: var(--parchment);
+  line-height: 1.6;
   position: relative;
   z-index: 1;
+  max-width: 700px;
 }
 
 .quote-text em {
   font-style: normal;
   color: var(--coral-light);
+  font-weight: 700;
 }
 
 .quote-context {
-  margin-top: 14px;
-  font-size: 12px;
-  color: rgba(245,240,235,0.55);
-  font-weight: 500;
+  margin-top: 18px;
+  font-size: 10.5px;
+  color: rgba(240,232,216,0.45);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   position: relative;
   z-index: 1;
+  font-family: 'Outfit', sans-serif;
 }
 
 /* ─── HERO EVENT CARD ─── */
 .hero-event {
   background: var(--coral-pale);
-  border: 2px solid var(--coral);
-  border-radius: 14px;
-  padding: 20px 22px;
+  border: 0.5px solid rgba(207,73,40,0.3);
+  border-left: 4px solid var(--coral);
+  border-radius: 3px;
+  padding: 20px 24px;
   margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
@@ -1211,7 +1255,7 @@ body {
 const G_GREEN  = '#1E3B1E';
 const G_GREEN2 = '#4A6741';
 const G_CORAL  = '#CF4928';
-const G_AMBER  = '#B5730A';
+const G_AMBER  = '#8A6A1A';
 const G_POS    = '#1A6B2A';
 const G_NEG    = '#C03030';
 const G_PURPLE = '#7C4DA0';
@@ -1257,10 +1301,10 @@ new Chart(document.getElementById('mainPLChart'), {
     responsive: true, maintainAspectRatio: false,
     interaction: { mode: 'index', intersect: false },
     plugins: {
-      legend: { position: 'top', labels: { padding: 16, boxWidth: 10, boxHeight: 10, usePointStyle: true, color: '#444' }},
+      legend: { position: 'top', labels: { padding: 16, boxWidth: 10, boxHeight: 10, usePointStyle: true, color: '#3D3328' }},
       tooltip: {
-        backgroundColor: '#fff', borderColor: 'rgba(30,59,30,0.2)', borderWidth: 1,
-        titleColor: '#1a1a1a', bodyColor: '#444', padding: 12,
+        backgroundColor: '#F7F2E9', borderColor: 'rgba(28,22,17,0.2)', borderWidth: 1,
+        titleColor: '#1C1611', bodyColor: '#3D3328', padding: 12,
         callbacks: { label: ctx => `  ${ctx.dataset.label}: ${ctx.raw < 0 ? '−' : ''}${fmt(ctx.parsed.y)}` }
       }
     },
@@ -1285,10 +1329,10 @@ new Chart(document.getElementById('ytdCatChart'), {
   options: {
     responsive: true, maintainAspectRatio: false, cutout: '66%',
     plugins: {
-      legend: { position: 'right', labels: { padding: 12, boxWidth: 10, boxHeight: 10, usePointStyle: true, color: '#444' }},
+      legend: { position: 'right', labels: { padding: 12, boxWidth: 10, boxHeight: 10, usePointStyle: true, color: '#3D3328' }},
       tooltip: {
-        backgroundColor: '#fff', borderColor: 'rgba(30,59,30,0.2)', borderWidth: 1,
-        titleColor: '#1a1a1a', bodyColor: '#444', padding: 10,
+        backgroundColor: '#F7F2E9', borderColor: 'rgba(28,22,17,0.2)', borderWidth: 1,
+        titleColor: '#1C1611', bodyColor: '#3D3328', padding: 10,
         callbacks: { label: ctx => `  ${ctx.label}: ${fmt(ctx.raw)}` }
       }
     }
@@ -1309,10 +1353,10 @@ new Chart(document.getElementById('aprCatChart'), {
   options: {
     responsive: true, maintainAspectRatio: false, cutout: '66%',
     plugins: {
-      legend: { position: 'right', labels: { padding: 10, boxWidth: 10, boxHeight: 10, usePointStyle: true, color: '#444' }},
+      legend: { position: 'right', labels: { padding: 10, boxWidth: 10, boxHeight: 10, usePointStyle: true, color: '#3D3328' }},
       tooltip: {
-        backgroundColor: '#fff', borderColor: 'rgba(30,59,30,0.2)', borderWidth: 1,
-        titleColor: '#1a1a1a', bodyColor: '#444', padding: 10,
+        backgroundColor: '#F7F2E9', borderColor: 'rgba(28,22,17,0.2)', borderWidth: 1,
+        titleColor: '#1C1611', bodyColor: '#3D3328', padding: 10,
         callbacks: { label: ctx => `  ${ctx.label}: ${fmt(ctx.raw)}` }
       }
     }
@@ -1335,8 +1379,8 @@ new Chart(document.getElementById('aprExpChart'), {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#fff', borderColor: 'rgba(30,59,30,0.2)', borderWidth: 1,
-        titleColor: '#1a1a1a', bodyColor: '#444', padding: 10,
+        backgroundColor: '#F7F2E9', borderColor: 'rgba(28,22,17,0.2)', borderWidth: 1,
+        titleColor: '#1C1611', bodyColor: '#3D3328', padding: 10,
         callbacks: { label: ctx => `  ${fmt(ctx.raw)}` }
       }
     },
