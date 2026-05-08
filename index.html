@@ -285,7 +285,7 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
   <div class="kpi-grid">
     <div class="kpi-card amber anim d1"><div class="kpi-label">Invoiced this week</div><div class="kpi-value amber" data-cu="5972">$5,972</div><div class="kpi-sub">Apr 14–16, 2026</div><span class="badge neutral">4 invoices</span></div>
     <div class="kpi-card pos anim d2"><div class="kpi-label">Collected</div><div class="kpi-value pos" data-cu="1500">$1,500</div><div class="kpi-sub">a secret wine bar 2/2</div><span class="badge up">Paid</span></div>
-    <div class="kpi-card amber clickable anim d3" onclick="toggleInvDrawer('weekly')"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="2140">$2,140</div><div class="kpi-sub">3 invoices sent</div><span class="badge warn">Pending</span><div class="drill-hint">Tap to see invoices</div></div>
+    <div class="kpi-card amber clickable anim d3" onclick="toggleInvDrawer('weekly')"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="2140">$2,140</div><div class="kpi-sub">4 invoices outstanding</div><span class="badge warn">Pending</span><div class="drill-hint">Tap to see invoices</div></div>
     <div id="weekly-inv-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--gold)"><div class="card-title">Awaiting payment — this week</div><div id="weekly-inv-list"></div></div></div>
     <div class="kpi-card green anim d4"><div class="kpi-label">May this month</div><div class="kpi-value pos" data-cu="13304">+$13,304</div><div class="kpi-sub">Net P&L month-to-date</div><span class="badge up">Best month</span></div>
   </div>
@@ -314,7 +314,7 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
     <div class="kpi-card coral clickable anim d2" onclick="toggleExpDrawer('monthly')"><div class="kpi-label">Expenses — May</div><div class="kpi-value coral" data-cu="291">$291</div><div class="kpi-sub">Per Year Overview</div><span class="badge up">-98% vs Apr</span><div class="drill-hint">Tap to see by category</div></div>
     <div id="monthly-exp-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--coral)"><div class="card-title">May expenses by category</div><div id="monthly-exp-cats"></div></div></div>
     <div class="kpi-card pos anim d3"><div class="kpi-label">Net P&L — May</div><div class="kpi-value pos">+$13,304</div><div class="kpi-sub">Best month ever</div><span class="badge up">Record</span></div>
-    <div class="kpi-card amber clickable anim d4" onclick="toggleInvDrawer('monthly')"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="2140">$2,140</div><div class="kpi-sub">6 invoices outstanding</div><span class="badge warn">Chase these</span><div class="drill-hint">Tap to see invoices</div></div>
+    <div class="kpi-card amber clickable anim d4" onclick="toggleInvDrawer('monthly')"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="2140">$2,140</div><div class="kpi-sub">4 invoices outstanding</div><span class="badge warn">Chase these</span><div class="drill-hint">Tap to see invoices</div></div>
   </div>
   <div id="monthly-inv-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--gold)"><div class="card-title">Awaiting payment — May</div><div id="monthly-inv-list"></div></div></div>
   <div class="card green-frame anim" style="margin-bottom:10px">
@@ -329,29 +329,29 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
     <div class="card"><div class="card-title">May revenue by category</div><div class="card-chart" style="height:220px"><canvas id="aprCatChart"></canvas></div></div>
     <div class="card"><div class="card-title">May expenses</div><div class="card-chart"><canvas id="aprExpChart"></canvas></div></div>
   </div>
-  <div class="section-label">Pending invoices — awaiting payment</div>
+    <div class="section-label">Pending invoices — awaiting payment</div>
   <div class="card anim">
     <div class="tscroll"><table class="data-table"><thead><tr><th>Client</th><th>Type</th><th>Invoiced</th><th>Status</th><th style="text-align:right">Amount</th></tr></thead><tbody>
-      <tr><td class="cname" style="color:var(--coral);font-weight:700">Andsfood</td><td><span class="cat-pill">Consulting</span></td><td class="dcell">31 Mar</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$3,200.00</td></tr>
-      <tr><td class="cname" style="color:var(--coral);font-weight:700">Casa Cicheti</td><td><span class="cat-pill">Collab</span></td><td class="dcell">15 Apr</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$3,597.48</td></tr>
-      <tr><td class="cname">Tan Private Dining (50% Deposit)</td><td><span class="cat-pill">Dinner Party</span></td><td class="dcell">15 Apr</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$800.00</td></tr>
-      <tr><td class="cname">Lee Hish LEK (50% Deposit)</td><td><span class="cat-pill">Dinner Party</span></td><td class="dcell">13 Apr</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$600.00</td></tr>
-      <tr><td class="cname">Oatside</td><td><span class="cat-pill">Freelance</span></td><td class="dcell">30 Mar</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$400.00</td></tr>
-      <tr><td class="cname">GRAPEVIBES — Bread ×3</td><td><span class="cat-pill">Freelance</span></td><td class="dcell">Apr 2–15</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$225.00</td></tr>
+      <tr><td class="cname">GRAPEVIBES PTE. LTD.</td><td><span class="cat-pill">Freelance</span></td><td class="dcell">2026-05-01</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$75.00</td></tr>
+      <tr><td class="cname">Revolution wine bar</td><td><span class="cat-pill">Collab</span></td><td class="dcell">2026-05-05</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$1,000.00</td></tr>
+      <tr><td class="cname">GRAPEVIBES PTE. LTD.</td><td><span class="cat-pill">Freelance</span></td><td class="dcell">2026-05-07</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$75.00</td></tr>
+      <tr><td class="cname">Huang lui 24 May Private dining 50% Deposit</td><td><span class="cat-pill">Dinner Party</span></td><td class="dcell">2026-05-08</td><td><span class="spill s-await">Awaiting</span></td><td class="acol">$990.00</td></tr>
     </tbody></table></div>
-    <div class="tf"><span class="tf-lbl">Total awaiting</span><span class="tf-val">$8,822.48</span></div>
+    <div class="tf"><span class="tf-lbl">Total awaiting</span><span class="tf-val">$2,140.00</span></div>
   </div>
   <div class="section-label">Pipeline — not yet invoiced</div>
   <div class="card anim">
     <div class="tscroll"><table class="data-table"><thead><tr><th>Client</th><th>Type</th><th>Expected</th><th style="text-align:right">Amount</th></tr></thead><tbody>
-      <tr><td class="cname">Revolution Wine Bar</td><td><span class="cat-pill">Collab</span></td><td style="color:var(--ink-muted);font-size:12px">TBD</td><td class="acol pur">$1,500.00</td></tr>
-      <tr><td class="cname">Tan Private Dining (50% Remaining)</td><td><span class="cat-pill">Dinner Party</span></td><td style="color:var(--ink-muted);font-size:12px">Post-event</td><td class="acol pur">$800.00</td></tr>
-      <tr><td class="cname">Lee Hish LEK (50% Remaining)</td><td><span class="cat-pill">Dinner Party</span></td><td class="dcell">30 Apr</td><td class="acol pur">$650.00</td></tr>
-      <tr><td class="cname">GRAPEVIBES — Bread ×2</td><td><span class="cat-pill">Freelance</span></td><td style="color:var(--ink-muted);font-size:12px">Recurring</td><td class="acol pur">$150.00</td></tr>
+      <tr><td class="cname">GRAPEVIBES PTE. LTD.</td><td><span class="cat-pill">Freelance</span></td><td style="color:var(--ink-muted);font-size:12px">2026-05-01</td><td class="acol pur">$75.00</td></tr>
+      <tr><td class="cname">Nicole & Ee Jin Private dining Yi Residence 22 May 50% remainig</td><td><span class="cat-pill">Dinner Party</span></td><td style="color:var(--ink-muted);font-size:12px">2026-05-01</td><td class="acol pur">$600.00</td></tr>
+      <tr><td class="cname">Dan 23 May Private dining 50% Remaining</td><td><span class="cat-pill">Dinner Party</span></td><td style="color:var(--ink-muted);font-size:12px">2026-05-01</td><td class="acol pur">$825.00</td></tr>
+      <tr><td class="cname">Huang lui 24 May Private dining 50% Remaining</td><td><span class="cat-pill">Dinner Party</span></td><td style="color:var(--ink-muted);font-size:12px">2026-05-01</td><td class="acol pur">$990.00</td></tr>
+      <tr><td class="cname">GRAPEVIBES PTE. LTD.</td><td><span class="cat-pill">Freelance</span></td><td style="color:var(--ink-muted);font-size:12px">2026-05-01</td><td class="acol pur">$75.00</td></tr>
+      <tr><td class="cname">GRAPEVIBES PTE. LTD.</td><td><span class="cat-pill">Freelance</span></td><td style="color:var(--ink-muted);font-size:12px">2026-05-01</td><td class="acol pur">$75.00</td></tr>
     </tbody></table></div>
-    <div class="tf"><span class="tf-lbl">Pipeline total</span><span class="tf-val pur">$3,100.00</span></div>
+    <div class="tf"><span class="tf-lbl">Pipeline total</span><span class="tf-val pur">$2,640.00</span></div>
   </div>
-  <div class="section-label">Insights</div>
+<div class="section-label">Insights</div>
   <div class="ig">
     <div class="ic win anim d1"><div class="it">Win</div><div class="itx">Best month on record. April is only 17 days in and it's already double any previous month.</div><div class="in">+$13,304</div></div>
     <div class="ic win anim d2"><div class="it">Win</div><div class="itx">Expenses dropped to $6K while revenue doubled. The margin is finally working in your favour.</div><div class="in">−54% costs</div></div>
@@ -656,12 +656,10 @@ const INV_WEEKLY=[
   {c:'GRAPEVIBES — Bread Delivery',amt:75},
 ];
 const INV_MONTHLY=[
-  {c:'Andsfood',amt:3200},
-  {c:'Casa Cicheti',amt:3597.48},
-  {c:'Tan Private Dining (50% Deposit)',amt:800},
-  {c:'Lee Hish LEK (50% Deposit)',amt:600},
-  {c:'Oatside',amt:400},
-  {c:'GRAPEVIBES — Bread ×3',amt:225},
+  {c:"GRAPEVIBES PTE. LTD.",amt:75.0},
+  {c:"Revolution wine bar",amt:1000.0},
+  {c:"GRAPEVIBES PTE. LTD.",amt:75.0},
+  {c:"Huang lui 24 May Private dining 50% Deposit",amt:990.0}
 ];
 
 function renderInvList(containerId,items){
