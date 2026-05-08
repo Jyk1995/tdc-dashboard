@@ -841,6 +841,9 @@ setTimeout(animProg,350);
 window.addEventListener('resize',()=>{
   if(document.getElementById('dpDropdown').classList.contains('open')) positionDP();
 });
+// Initialize date picker label on page load
+document.getElementById('dateLabel').textContent = buildLabel();
+
 </script>
 
 <!-- Date picker portal — direct child of body so no stacking context can trap it -->
