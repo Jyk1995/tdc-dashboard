@@ -287,7 +287,7 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
     <div class="kpi-card pos anim d2"><div class="kpi-label">Collected</div><div class="kpi-value pos" data-cu="1500">$1,500</div><div class="kpi-sub">a secret wine bar 2/2</div><span class="badge up">Paid</span></div>
     <div class="kpi-card amber clickable anim d3" onclick="toggleInvDrawer('weekly')"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="4472">$4,472</div><div class="kpi-sub">3 invoices sent</div><span class="badge warn">Pending</span><div class="drill-hint">Tap to see invoices</div></div>
     <div id="weekly-inv-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--gold)"><div class="card-title">Awaiting payment — this week</div><div id="weekly-inv-list"></div></div></div>
-    <div class="kpi-card green anim d4"><div class="kpi-label">April so far</div><div class="kpi-value pos" data-cu="13304">+$13,304</div><div class="kpi-sub">Net P&L month-to-date</div><span class="badge up">Best month</span></div>
+    <div class="kpi-card green anim d4"><div class="kpi-label">May this month</div><div class="kpi-value pos" data-cu="13304">+$13,304</div><div class="kpi-sub">Net P&L month-to-date</div><span class="badge up">Best month</span></div>
   </div>
   <div class="section-label">This week's invoices</div>
   <div class="card anim">
@@ -310,15 +310,15 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
 <!-- ═══ THIS MONTH ═══ -->
 <div class="period-panel active" id="panel-monthly">
   <div class="kpi-grid">
-    <div class="kpi-card pos anim d1"><div class="kpi-label">Revenue — April</div><div class="kpi-value pos" data-cu="19477">$19,477</div><div class="kpi-sub">All invoices incl. pipeline</div><span class="badge up">+101% vs Mar</span></div>
-    <div class="kpi-card coral clickable anim d2" onclick="toggleExpDrawer('monthly')"><div class="kpi-label">Expenses — April</div><div class="kpi-value coral" data-cu="6174">$6,174</div><div class="kpi-sub">Per Year Overview</div><span class="badge up">−54% vs Mar</span><div class="drill-hint">Tap to see by category</div></div>
-    <div id="monthly-exp-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--coral)"><div class="card-title">April expenses by category</div><div id="monthly-exp-cats"></div></div></div>
-    <div class="kpi-card pos anim d3"><div class="kpi-label">Net P&L — April</div><div class="kpi-value pos">+$13,304</div><div class="kpi-sub">Best month ever</div><span class="badge up">Record</span></div>
+    <div class="kpi-card pos anim d1"><div class="kpi-label">Revenue — May</div><div class="kpi-value pos" data-cu="19477">$19,477</div><div class="kpi-sub">All invoices incl. pipeline</div><span class="badge up">+101% vs Mar</span></div>
+    <div class="kpi-card coral clickable anim d2" onclick="toggleExpDrawer('monthly')"><div class="kpi-label">Expenses — May</div><div class="kpi-value coral" data-cu="6174">$6,174</div><div class="kpi-sub">Per Year Overview</div><span class="badge up">−54% vs Mar</span><div class="drill-hint">Tap to see by category</div></div>
+    <div id="monthly-exp-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--coral)"><div class="card-title">May expenses by category</div><div id="monthly-exp-cats"></div></div></div>
+    <div class="kpi-card pos anim d3"><div class="kpi-label">Net P&L — May</div><div class="kpi-value pos">+$13,304</div><div class="kpi-sub">Best month ever</div><span class="badge up">Record</span></div>
     <div class="kpi-card amber clickable anim d4" onclick="toggleInvDrawer('monthly')"><div class="kpi-label">Awaiting payment</div><div class="kpi-value amber" data-cu="8822">$8,822</div><div class="kpi-sub">6 invoices outstanding</div><span class="badge warn">Chase these</span><div class="drill-hint">Tap to see invoices</div></div>
   </div>
-  <div id="monthly-inv-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--gold)"><div class="card-title">Awaiting payment — April</div><div id="monthly-inv-list"></div></div></div>
+  <div id="monthly-inv-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--gold)"><div class="card-title">Awaiting payment — May</div><div id="monthly-inv-list"></div></div></div>
   <div class="card green-frame anim" style="margin-bottom:10px">
-    <div class="card-title">April vs $10K monthly target <span style="color:var(--ink-muted);font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">Day 17 of 30</span></div>
+    <div class="card-title">May vs $10K monthly target <span style="color:var(--ink-muted);font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">Day 17 of 30</span></div>
     <div class="pgp">
       <div class="pgi"><div class="pgv" style="color:var(--pos)">$7,555</div><div class="pgl"><span>Cash collected</span><span style="color:var(--pos);font-weight:700">76%</span></div><div class="pgb"><div class="pgf pos" data-pct="76"></div></div></div>
       <div class="pgi"><div class="pgv" style="color:var(--green)">$16,377</div><div class="pgl"><span>Paid + invoiced</span><span style="color:var(--pos);font-weight:700">164%</span></div><div class="pgb"><div class="pgf green" data-pct="100"></div></div></div>
@@ -326,8 +326,8 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
     </div>
   </div>
   <div class="grid-2-1 anim">
-    <div class="card"><div class="card-title">April revenue by category</div><div class="card-chart" style="height:220px"><canvas id="aprCatChart"></canvas></div></div>
-    <div class="card"><div class="card-title">April expenses</div><div class="card-chart"><canvas id="aprExpChart"></canvas></div></div>
+    <div class="card"><div class="card-title">May revenue by category</div><div class="card-chart" style="height:220px"><canvas id="aprCatChart"></canvas></div></div>
+    <div class="card"><div class="card-title">May expenses</div><div class="card-chart"><canvas id="aprExpChart"></canvas></div></div>
   </div>
   <div class="section-label">Pending invoices — awaiting payment</div>
   <div class="card anim">
@@ -363,11 +363,11 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
 <!-- ═══ ALL TIME ═══ -->
 <div class="period-panel" id="panel-alltime">
   <div class="kpi-grid">
-    <div class="kpi-card green anim d1"><div class="kpi-label">YTD Revenue</div><div class="kpi-value green" data-cu="44620">$44,620</div><div class="kpi-sub">Jan – Apr 2026</div></div>
-    <div class="kpi-card coral clickable anim d2" onclick="toggleExpDrawer('alltime')"><div class="kpi-label">YTD Expenses</div><div class="kpi-value coral" data-cu="42119">$42,119</div><div class="kpi-sub">Jan – Apr 2026</div><div class="drill-hint">Tap to see by category</div></div>
+    <div class="kpi-card green anim d1"><div class="kpi-label">YTD Revenue</div><div class="kpi-value green" data-cu="49841">$49,841</div><div class="kpi-sub">Jan – Apr 2026</div></div>
+    <div class="kpi-card coral clickable anim d2" onclick="toggleExpDrawer('alltime')"><div class="kpi-label">YTD Expenses</div><div class="kpi-value coral" data-cu="52635">$52,635</div><div class="kpi-sub">Jan – Apr 2026</div><div class="drill-hint">Tap to see by category</div></div>
     <div id="alltime-exp-drawer" class="exp-drawer"><div class="card" style="border-top:2.5px solid var(--coral)"><div class="card-title">YTD expenses by category</div><div id="alltime-exp-cats"></div></div></div>
     <div class="kpi-card pos anim d3"><div class="kpi-label">YTD Net P&L</div><div class="kpi-value pos">+$2,502</div><div class="kpi-sub">Profitable YTD</div><span class="badge up">In the green</span></div>
-    <div class="kpi-card pos anim d4"><div class="kpi-label">Best Month</div><div class="kpi-value pos">+$13,304</div><div class="kpi-sub">April 2026</div><span class="badge up">Record</span></div>
+    <div class="kpi-card pos anim d4"><div class="kpi-label">Best Month</div><div class="kpi-value pos">+$13,304</div><div class="kpi-sub">May 2026</div><span class="badge up">Record</span></div>
   </div>
   <div class="card green-frame anim" style="margin-bottom:10px"><div class="card-title">Monthly revenue vs expenses vs net P&L</div><div class="card-chart" style="height:270px"><canvas id="mainPLChart"></canvas></div></div>
   <div class="grid-equal anim">
@@ -426,51 +426,15 @@ body{background:var(--parchment);color:var(--ink);font-family:'Outfit',sans-seri
 
 <script>
 /* ═══ DATA ═══ */
-const TXNS = [
-  // Jan
-  {d:'2026-01-04',c:'Kick Push',cat:'Consulting',s:'Paid',amt:2500},
-  {d:'2026-01-04',c:'Yi Residence (4 Jan) 1/2',cat:'Freelance',s:'Paid',amt:750},
-  {d:'2026-01-04',c:'Yi Residence (4 Jan) 2/2',cat:'Freelance',s:'Paid',amt:125},
-  {d:'2026-01-12',c:'Kick Push',cat:'Consulting',s:'Paid',amt:3000},
-  {d:'2026-01-12',c:'Kick Push',cat:'Consulting',s:'Paid',amt:182.18},
-  {d:'2026-01-18',c:'Yi Residence (21 Jan)',cat:'Freelance',s:'Paid',amt:1500},
-  // Feb
-  {d:'2026-01-29',c:'Yi Residence (15 Feb)',cat:'Freelance',s:'Paid',amt:1220},
-  {d:'2026-01-29',c:'Yi Residence (16 Feb)',cat:'Freelance',s:'Paid',amt:2100},
-  {d:'2026-02-02',c:'Kick Push',cat:'Consulting',s:'Paid',amt:54.80},
-  {d:'2026-02-04',c:'Maxime Lemeunier',cat:'Dinner Party',s:'Paid',amt:1200},
-  {d:'2026-02-09',c:'Kick Push',cat:'Consulting',s:'Paid',amt:48.73},
-  {d:'2026-02-18',c:'Yi Residence (21 Feb)',cat:'Dinner Party',s:'Paid',amt:1350},
-  {d:'2026-02-27',c:'Trafigura PTE LTD',cat:'Dinner Party',s:'Paid',amt:1150},
-  {d:'2026-03-02',c:'Justin Private Dining (28 Feb)',cat:'Dinner Party',s:'Paid',amt:1430},
-  // Mar
-  {d:'2026-03-06',c:'a secret wine bar pop-up',cat:'Collab',s:'Paid',amt:3000},
-  {d:'2026-03-13',c:'Vixen Collective (50% Deposit)',cat:'Dinner Party',s:'Paid',amt:1000},
-  {d:'2026-03-18',c:'Bjorn Shen & Sons',cat:'Collab',s:'Paid',amt:1068.26},
-  {d:'2026-03-18',c:'GRAPEVIBES — Bread',cat:'Freelance',s:'Paid',amt:90},
-  {d:'2026-03-19',c:'Karl Cluck',cat:'Dinner Party',s:'Paid',amt:1200},
-  {d:'2026-03-25',c:'GRAPEVIBES — Bread',cat:'Freelance',s:'Paid',amt:240},
-  {d:'2026-03-27',c:'jung',cat:'Ingredient/Product',s:'Paid',amt:1380},
-  {d:'2026-03-27',c:'Heidi',cat:'Ingredient/Product',s:'Paid',amt:415},
-  {d:'2026-03-27',c:'bits Tolosa',cat:'Ingredient/Product',s:'Paid',amt:140},
-  // Apr
-  {d:'2026-03-30',c:'Oatside',cat:'Freelance',s:'In Progress',amt:400},
-  {d:'2026-03-31',c:'Andsfood',cat:'Consulting',s:'In Progress',amt:3200},
-  {d:'2026-04-02',c:'GRAPEVIBES — Bread',cat:'Freelance',s:'In Progress',amt:75},
-  {d:'2026-04-08',c:'GRAPEVIBES — Bread',cat:'Freelance',s:'In Progress',amt:75},
-  {d:'2026-04-08',c:'Vixen Collective (50% Remaining)',cat:'Dinner Party',s:'Paid',amt:2054.90},
-  {d:'2026-04-08',c:'a secret wine bar 1/2',cat:'Collab',s:'Paid',amt:4000},
-  {d:'2026-04-13',c:'Lee Hish LEK (50% Deposit)',cat:'Dinner Party',s:'In Progress',amt:600},
-  {d:'2026-04-14',c:'a secret wine bar 2/2',cat:'Collab',s:'Paid',amt:1500},
-  {d:'2026-04-15',c:'Casa Cicheti',cat:'Collab',s:'In Progress',amt:3597.48},
-  {d:'2026-04-15',c:'GRAPEVIBES — Bread',cat:'Freelance',s:'In Progress',amt:75},
-  {d:'2026-04-15',c:'Tan Private Dining (50% Deposit)',cat:'Dinner Party',s:'In Progress',amt:800},
-];
-const MONTHLY_EXP = {'2026-01':9278.63,'2026-02':13148.93,'2026-03':13518.32,'2026-04':6173.56};
-const DAYS_IN_MONTH = {'2026-01':31,'2026-02':28,'2026-03':31,'2026-04':30};
+const TXNS = [{"d":"2026-01-04","c":"KICK PUSH PTE. LTD.","cat":"Consulting","s":"Paid","amt":2500.0},{"d":"2026-01-04","c":"Yi Residence Pte Ltd (4 Jan)","cat":"Freelance","s":"Paid","amt":750.0},{"d":"2026-01-04","c":"Yi Residence Pte Ltd (4 Jan)","cat":"Freelance","s":"Paid","amt":125.0},{"d":"2026-01-12","c":"KICK PUSH PTE. LTD.","cat":"Consulting","s":"Paid","amt":3000.0},{"d":"2026-01-18","c":"Yi Residence Pte Ltd (21Jan)","cat":"Freelance","s":"Paid","amt":1500.0},{"d":"2026-01-12","c":"KICK PUSH PTE. LTD.","cat":"Consulting","s":"Paid","amt":182.18},{"d":"2026-01-29","c":"Yi Residence Pte Ltd (15 Feb)","cat":"Freelance","s":"Paid","amt":1220.0},{"d":"2026-01-29","c":"Yi Residence Pte Ltd (16 Feb)","cat":"Freelance","s":"Paid","amt":2100.0},{"d":"2026-03-02","c":"Justin Private dining (28 Feb)","cat":"Dinner Party","s":"Paid","amt":1430.0},{"d":"2026-02-02","c":"KICK PUSH PTE. LTD.","cat":"Consulting","s":"Paid","amt":54.8},{"d":"2026-02-04","c":"Maxime Lemeunier","cat":"Dinner Party","s":"Paid","amt":1200.0},{"d":"2026-02-09","c":"KICK PUSH PTE. LTD.","cat":"Consulting","s":"Paid","amt":48.73},{"d":"2026-02-18","c":"Yi Residence Pte Ltd (21 Feb)","cat":"Dinner Party","s":"Paid","amt":1350.0},{"d":"2026-03-06","c":"a secret wine bar pop-up","cat":"Collab","s":"Paid","amt":3000.0},{"d":"2026-03-18","c":"Bjorn Shen & sons Pte Ltd","cat":"Collab","s":"Paid","amt":1068.26},{"d":"2026-02-27","c":"Trafigura PTE LTD","cat":"Dinner Party","s":"Paid","amt":1150.0},{"d":"2026-03-19","c":"karl cluck","cat":"Dinner Party","s":"Paid","amt":1200.0},{"d":"2026-03-13","c":"The Vixen Collective Pte.
+Ltd. 50% deposit","cat":"Dinner Party","s":"Paid","amt":1000.0},{"d":"2026-03-18","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"Paid","amt":90.0},{"d":"2026-03-25","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"Paid","amt":240.0},{"d":"2026-03-27","c":"jung","cat":"Ingredient/Product","s":"Paid","amt":1380.0},{"d":"2026-03-27","c":"Heidi","cat":"Ingredient/Product","s":"Paid","amt":415.0},{"d":"2026-03-27","c":"bits Tolosa","cat":"Ingredient/Product","s":"Paid","amt":140.0},{"d":"2026-03-30","c":"Oatside","cat":"Freelance","s":"In Progress","amt":400.0},{"d":"2026-03-31","c":"Andsfood","cat":"Consulting","s":"Paid","amt":700.0},{"d":"2026-04-02","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"Paid","amt":75.0},{"d":"2026-04-08","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"Paid","amt":75.0},{"d":"2026-04-08","c":"The Vixen Collective Pte.
+Ltd. 50% Remaining","cat":"Dinner Party","s":"Paid","amt":2054.9},{"d":"2026-04-15","c":"Casa cicheti","cat":"Collab","s":"In Progress","amt":3597.48},{"d":"2026-04-15","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"Paid","amt":75.0},{"d":"2026-04-08","c":"a secret wine bar pop-up 1/2","cat":"Collab","s":"Paid","amt":4000.0},{"d":"2026-04-13","c":"Lee hish LEK Private dining 50% Deposit","cat":"Dinner Party","s":"Paid","amt":600.0},{"d":"2026-04-15","c":"Tan Private dining 50% Deposit","cat":"Dinner Party","s":"Paid","amt":800.0},{"d":"2026-04-14","c":"a secret wine bar pop-up 2/2","cat":"Collab","s":"Paid","amt":1500.0},{"d":"2026-04-26","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"In Progress","amt":75.0},{"d":"2026-04-26","c":"Tan Private dining 50% Remaininng","cat":"Dinner Party","s":"Paid","amt":844.04},{"d":"2026-04-27","c":"Andsfood","cat":"Consulting","s":"Paid","amt":2413.79},{"d":"2026-04-27","c":"Dan 23 May Private dining 50% Deposit","cat":"Dinner Party","s":"Paid","amt":975.0},{"d":"2026-05-01","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"In Progress","amt":75.0},{"d":"2026-05-01","c":"Lee hish LEK Private dining 50%Remaining","cat":"Dinner Party","s":"Paid","amt":951.5},{"d":"2026-05-02","c":"Nicole & Ee Jin Private dining Yi Residence 22 May 50% Deposit","cat":"Dinner Party","s":"Paid","amt":600.0},{"d":"2026-05-05","c":"Revolution wine bar","cat":"Collab","s":"In Progress","amt":1000.0},{"d":"2026-05-07","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"In Progress","amt":75.0},{"d":"2026-05-08","c":"Huang lui 24 May Private dining 50% Deposit","cat":"Dinner Party","s":"In Progress","amt":1080.0},{"d":"2026-05-01","c":"Nicole & Ee Jin Private dining Yi Residence 22 May 50% remainig","cat":"Dinner Party","s":"Blocked","amt":600.0},{"d":"2026-05-01","c":"Dan 23 May Private dining 50% Remaining","cat":"Dinner Party","s":"Blocked","amt":825.0},{"d":"2026-05-01","c":"Huang lui 24 May Private dining 50% Remaining","cat":"Dinner Party","s":"Blocked","amt":1080.0},{"d":"2026-05-01","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"Blocked","amt":75.0},{"d":"2026-05-01","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"Blocked","amt":75.0},{"d":"2026-05-01","c":"GRAPEVIBES PTE. LTD.","cat":"Freelance","s":"Blocked","amt":75.0}];
+const MONTHLY_EXP = {"2026-01": 9278.63, "2026-02": 13148.93, "2026-03": 13682.32, "2026-04": 16234.31, "2026-05": 290.79};
+const DAYS_IN_MONTH = {"2026-01": 31, "2026-02": 28, "2026-03": 31, "2026-04": 30, "2026-05": 31};
+const EXP_CAT_BY_MONTH = {"2026-01": {"Salary": 4431.0, "Meeting": 1383.18, "Ingredients": 1344.46, "Equipments": 1293.6, "Marketing": 539.99, "Transport": 139.11, "Staff wellfare": 102.21, "Utility": 25.0, "Travel": 20.08}, "2026-02": {"Salary": 4431.0, "Meeting": 3796.8, "Ingredients": 2103.72, "Equipments": 1443.27, "Utility": 603.74, "Marketing": 281.23, "Transport": 271.59, "Staff wellfare": 182.28, "Travel": 19.5, "Admin": 15.8}, "2026-03": {"Salary": 4431.0, "Ingredients": 3554.22, "Equipments": 2014.22, "Meeting": 1811.87, "Staff wellfare": 636.61, "Marketing": 450.21, "Transport": 327.57, "Utility": 292.67, "service / Part time": 150.0, "Admin": 13.95}, "2026-04": {"Ingredients": 5388.37, "Salary": 4431.0, "Equipments": 3520.91, "Meeting": 1186.65, "Transport": 556.15, "Staff wellfare": 517.48, "Marketing": 366.8, "Utility": 240.1, "Admin": 26.85}, "2026-05": {"Travel": 247.99, "Ingredients": 32.0, "Transport": 10.8}};
 
 /* ═══ DATE PICKER STATE ═══ */
-let calYear=2026, calMonth=3; // 0-indexed: April = 3
+let calYear=2026, calMonth=4; // 0-indexed: April = 3
 let rangeStart=null, rangeEnd=null;
 const MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const SHORT_MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -779,10 +743,10 @@ Chart.defaults.font.size=11;
 const TT={backgroundColor:'#FAF6EF',borderColor:'rgba(28,22,17,.18)',borderWidth:1,titleColor:'#1C1611',bodyColor:'#3D3328',padding:12};
 const f=v=>'$'+Math.round(Math.abs(v)).toLocaleString('en-SG');
 
-new Chart(document.getElementById('mainPLChart'),{data:{labels:['Jan','Feb','Mar','Apr *'],datasets:[
-  {type:'bar',label:'Revenue',data:[8057,7404,9682,19477],backgroundColor:'rgba(30,59,30,.55)',borderColor:'#1E3B1E',borderWidth:1.5,borderRadius:5,order:2},
-  {type:'bar',label:'Expenses',data:[9279,13149,13518,6174],backgroundColor:'rgba(207,73,40,.45)',borderColor:'#CF4928',borderWidth:1.5,borderRadius:5,order:3},
-  {type:'line',label:'Net P&L',data:[-1221,-5745,-3836,13304],borderColor:'#1A5C28',backgroundColor:'transparent',
+new Chart(document.getElementById('mainPLChart'),{data:{labels:["Jan", "Feb", "March", "April", "May"],datasets:[
+  {type:'bar',label:'Revenue',data:[11377, 4084, 10783, 17085, 6512],backgroundColor:'rgba(30,59,30,.55)',borderColor:'#1E3B1E',borderWidth:1.5,borderRadius:5,order:2},
+  {type:'bar',label:'Expenses',data:[9279, 13149, 13682, 16234, 291],backgroundColor:'rgba(207,73,40,.45)',borderColor:'#CF4928',borderWidth:1.5,borderRadius:5,order:3},
+  {type:'line',label:'Net P&L',data:[2099, -9065, -2899, 851, 6221],borderColor:'#1A5C28',backgroundColor:'transparent',
     pointBackgroundColor:ctx=>ctx.raw>=0?'#1A5C28':'#A82020',pointBorderColor:ctx=>ctx.raw>=0?'#1A5C28':'#A82020',
     pointRadius:6,pointHoverRadius:8,borderWidth:2.5,tension:.3,order:1}
 ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
@@ -791,16 +755,11 @@ new Chart(document.getElementById('mainPLChart'),{data:{labels:['Jan','Feb','Mar
 }});
 
 const COLS=['#5C3878','#2A6080','#8A6A1A','#4A6741','#CF4928'];
-new Chart(document.getElementById('ytdCatChart'),{type:'doughnut',data:{labels:['Collab','Dinner Party','Consulting','Freelance','Ingredients'],datasets:[{data:[13166,10785,8986,6650,1935],backgroundColor:COLS,borderColor:'#FAF6EF',borderWidth:3,hoverOffset:8}]},
-  options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'right',labels:{padding:12,boxWidth:10,boxHeight:10,usePointStyle:true,color:'#3D3328'}},tooltip:{...TT,callbacks:{label:ctx=>`  ${ctx.label}: ${f(ctx.raw)}`}}}},
-  plugins:[makeCenterPlugin('$44.6K','YTD')]});
+new Chart(document.getElementById('ytdCatChart'),{type:'doughnut',data:{labels:["Consulting", "Freelance", "Dinner Party", "Collab", "Ingredient/Product"],datasets:[{data:[8900, 6875, 15235, 14166, 1935],backgroundColor:COLS,borderColor:'#FAF6EF',borderWidth:3,hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'right',labels:{padding:12,boxWidth:10,boxHeight:10,usePointStyle:true,color:'#3D3328'}},tooltip:{...TT,callbacks:{label:ctx=>`  ${ctx.label}: ${f(ctx.raw)}`}}}},plugins:[makeCenterPlugin('$49.8K','YTD')]});
 
-new Chart(document.getElementById('aprCatChart'),{type:'doughnut',data:{labels:['Collab','Dinner Party','Consulting','Freelance'],datasets:[{data:[9097,3455,3200,625],backgroundColor:['#5C3878','#2A6080','#8A6A1A','#4A6741'],borderColor:'#FAF6EF',borderWidth:3,hoverOffset:8}]},
-  options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'right',labels:{padding:10,boxWidth:10,boxHeight:10,usePointStyle:true,color:'#3D3328'}},tooltip:{...TT,callbacks:{label:ctx=>`  ${ctx.label}: ${f(ctx.raw)}`}}}},
-  plugins:[makeCenterPlugin('$16.4K','invoiced')]});
+new Chart(document.getElementById('aprCatChart'),{type:'doughnut',data:{labels:["Freelance", "Dinner Party", "Collab"],datasets:[{data:[150, 2632, 1000],backgroundColor:['#5C3878','#2A6080','#8A6A1A','#4A6741'],borderColor:'#FAF6EF',borderWidth:3,hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'right',labels:{padding:10,boxWidth:10,boxHeight:10,usePointStyle:true,color:'#3D3328'}},tooltip:{...TT,callbacks:{label:ctx=>`  ${ctx.label}: ${f(ctx.raw)}`}}}},plugins:[makeCenterPlugin('$3.8K','invoiced')]});
 
-new Chart(document.getElementById('aprExpChart'),{type:'bar',data:{labels:['Equipment','Ingredients','Meetings','Wellfare','Utility','Transport'],datasets:[{data:[3053,1890,609,295,240,84],backgroundColor:'rgba(207,73,40,.38)',borderColor:'#CF4928',borderWidth:1.5,borderRadius:4}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:ctx=>`  ${f(ctx.raw)}`}}},scales:{x:{grid:{color:'rgba(28,22,17,.05)'},ticks:{callback:f,color:'#8A7E6F'}},y:{grid:{display:false},ticks:{color:'#555'}}}}});
+new Chart(document.getElementById('aprExpChart'),{type:'bar',data:{labels:["Travel", "Ingredients", "Transport"],datasets:[{data:[248, 32, 11],backgroundColor:'rgba(207,73,40,.38)',borderColor:'#CF4928',borderWidth:1.5,borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...TT,callbacks:{label:ctx=>`  ${f(ctx.raw)}`}}},scales:{x:{grid:{color:'rgba(28,22,17,.05)'},ticks:{callback:f,color:'#8A7E6F'}},y:{grid:{display:false},ticks:{color:'#555'}}}}});
 
 /* ═══ COUNT-UP ═══ */
 function cu(el,target,dur=800){
@@ -848,7 +807,7 @@ window.addEventListener('resize',()=>{
 <div class="dp-dropdown" id="dpDropdown">
   <div class="dp-cal-header">
     <button class="dp-cal-nav" onclick="prevMonth()">&#8592;</button>
-    <span class="dp-cal-title" id="calTitle">April 2026</span>
+    <span class="dp-cal-title" id="calTitle">May 2026</span>
     <button class="dp-cal-nav" onclick="nextMonth()">&#8594;</button>
   </div>
   <div class="dp-cal-grid" id="calGrid"></div>
