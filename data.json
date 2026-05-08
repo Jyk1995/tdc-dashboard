@@ -28,14 +28,14 @@
     },
     {
       "label": "May",
-      "revenue": 6511.5,
+      "revenue": 6331.5,
       "expenses": 290.79,
-      "net": 6220.71
+      "net": 6040.71
     }
   ],
   "ytd": {
-    "revenue": 49840.68,
+    "revenue": 49660.68,
     "expenses": 52634.98,
-    "net": -2794.3
+    "net": -2974.3
   }
 }
