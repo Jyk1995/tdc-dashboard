@@ -856,5 +856,30 @@ window.addEventListener('resize',()=>{
     <div class="dp-range-display" id="rangeDisplay">Pick a start date</div>
   </div>
 </div>
+
+<script>
+/* Live data overlay: fetches data.json and updates the P&L chart + YTD cards */
+(function(){
+  fetch('data.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){
+    var mc=Chart.getChart('mainPLChart');
+    if(mc){
+      mc.data.labels=d.months.map(function(m){return m.label;});
+      mc.data.datasets[0].data=d.months.map(function(m){return Math.round(m.revenue);});
+      mc.data.datasets[1].data=d.months.map(function(m){return Math.round(m.expenses);});
+      mc.data.datasets[2].data=d.months.map(function(m){return Math.round(m.net);});
+      mc.update();
+    }
+    var fmt=function(n){return '$'+Math.round(Math.abs(n)).toLocaleString('en-SG');};
+    document.querySelectorAll('.kpi-card').forEach(function(card){
+      var lbl=card.querySelector('.kpi-label');
+      var val=card.querySelector('.kpi-value');
+      if(!lbl||!val)return;
+      var t=lbl.textContent.trim();
+      if(t==='YTD Revenue'){val.textContent=fmt(d.ytd.revenue);val.setAttribute('data-cu',Math.round(d.ytd.revenue));}
+      else if(t==='YTD Expenses'){val.textContent=fmt(d.ytd.expenses);val.setAttribute('data-cu',Math.round(d.ytd.expenses));}
+    });
+  }).catch(function(){});
+})();
+</script>
 </body>
 </html>
