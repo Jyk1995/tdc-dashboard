@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-08",
+  "last_updated": "2026-05-17",
   "current_month": "May",
   "months": [
     {
@@ -23,19 +23,19 @@
     {
       "label": "April",
       "revenue": 17085.21,
-      "expenses": 16234.31,
-      "net": 850.9
+      "expenses": 16486.44,
+      "net": 598.77
     },
     {
       "label": "May",
-      "revenue": 6331.5,
-      "expenses": 290.79,
-      "net": 6040.71
+      "revenue": 8779.5,
+      "expenses": 4360.26,
+      "net": 4419.24
     }
   ],
   "ytd": {
-    "revenue": 49660.68,
-    "expenses": 52634.98,
-    "net": -2974.3
+    "revenue": 52108.68,
+    "expenses": 56956.58,
+    "net": -4847.9
   }
 }
