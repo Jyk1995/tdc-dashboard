@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-05-24",
-  "current_month": "May",
+  "last_updated": "2026-06-06",
+  "current_month": "June",
   "months": [
     {
       "label": "Jan",
@@ -28,14 +28,20 @@
     },
     {
       "label": "May",
-      "revenue": 8955.53,
-      "expenses": 4620.32,
-      "net": 4335.21
+      "revenue": 9172.63,
+      "expenses": 15886.08,
+      "net": -6713.45
+    },
+    {
+      "label": "June",
+      "revenue": 8086.5,
+      "expenses": 8.52,
+      "net": 8077.98
     }
   ],
   "ytd": {
-    "revenue": 52284.71,
-    "expenses": 57216.64,
-    "net": -4931.93
+    "revenue": 60588.31,
+    "expenses": 68490.92,
+    "net": -7902.61
   }
 }
